@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/">
+        <file>dbresource/database.ico</file>
+        <file>dbresource/database.png</file>
+    </qresource>
+</RCC>
