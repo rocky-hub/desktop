@@ -7,9 +7,8 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
     MainWindow w;
-    w.resize(1200, 600);
-    w.setWindowIcon(QIcon(":/dbresource/database.ico"));
-    w.setWindowTitle("rockySQL");
+    //w.resize(1500, 800);
+
     w.show();
     return a.exec();
 }
