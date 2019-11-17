@@ -9,6 +9,10 @@
 #include <QAction>
 #include <QToolBar>
 #include <QWidget>
+#include <QVBoxLayout>
+#include <QSplitter>
+#include <QLabel>
+#include <QLineEdit>
 
 class MainWindow : public QMainWindow
 {
@@ -20,11 +24,9 @@ public:
     void setupUi(QMainWindow *mainWindow);
     void initMenubar(QMainWindow *mainWindow);
     void initToolbar(QMainWindow *mainWindow);
-    void initLayout();
-    void loginLayout();
+    void initLayout(QMainWindow *mainWindow);
+    void loginLayout(QMainWindow *mainWindow);
     QMenuBar *menuBar;
-    QMenu *menu[10];
-    QAction *action;
     QToolBar *toolBar;
     QWidget *centralWidget;
     QGroupBox *formGroupBox;
