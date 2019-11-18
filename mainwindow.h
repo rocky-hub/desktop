@@ -13,6 +13,7 @@
 #include <QSplitter>
 #include <QLabel>
 #include <QLineEdit>
+#include <QHBoxLayout>
 
 class MainWindow : public QMainWindow
 {
@@ -24,8 +25,8 @@ public:
     void setupUi(QMainWindow *mainWindow);
     void initMenubar(QMainWindow *mainWindow);
     void initToolbar(QMainWindow *mainWindow);
-    void initLayout(QMainWindow *mainWindow);
-    void loginLayout(QMainWindow *mainWindow);
+    void initCentralWidget(QMainWindow *mainWindow);
+    QWidget *loginLayout();
     QMenuBar *menuBar;
     QToolBar *toolBar;
     QWidget *centralWidget;

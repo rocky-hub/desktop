@@ -19,12 +19,28 @@ void MainWindow::setupUi(QMainWindow *mainWindow)
 
     mainWindow->setWindowIcon(QIcon(":/dbresource/database.ico"));
     mainWindow->setWindowTitle("rockySQL");
-    mainWindow->resize(1500, 800);
+    mainWindow->resize(1000, 600);
 
     this->initMenubar(mainWindow);
     this->initToolbar(mainWindow);
-    this->initLayout(mainWindow);
-    this->loginLayout(mainWindow);
+    this->initCentralWidget(mainWindow);
+}
+
+void MainWindow::initCentralWidget(QMainWindow *mainWindow)
+{
+    QSplitter *mainSplitter = new QSplitter(Qt::Horizontal, mainWindow);
+    mainSplitter->setFrameStyle(QFrame::NoFrame);
+    mainSplitter->setHandleWidth(3);
+    mainSplitter->setChildrenCollapsible(false);
+
+    QWidget *leftWidget = new QWidget(mainWindow);
+    leftWidget->setStyleSheet("background: yellow");
+    QWidget *rightWidget = this->loginLayout();
+
+    mainSplitter->addWidget(leftWidget);
+    mainSplitter->addWidget(rightWidget);
+
+    setCentralWidget(mainSplitter);
 }
 
 void MainWindow::initMenubar(QMainWindow *mainWindow)
@@ -58,23 +74,22 @@ void MainWindow::initToolbar(QMainWindow *mainWindow)
     //toolBar = new QToolBar(mainWindow);
 }
 
-void MainWindow::initLayout(QMainWindow *mainWindow)
+QWidget* MainWindow::loginLayout()
 {
-    this->centralWidget = new QWidget(mainWindow);
-    //mainWindow->setCentralWidget(centralWidget);
-}
-
-void MainWindow::loginLayout(QMainWindow *mainWindow)
-{
-    QGroupBox *groupBox = new QGroupBox(tr("Sign in"));
+    QGroupBox *groupBox = new QGroupBox();
 
     QFormLayout *formLayout = new QFormLayout;
 
     QLineEdit *connectNameInput = new QLineEdit();
+    connectNameInput->setMinimumSize(200, 30);
     QLineEdit *hostInput = new QLineEdit();
+    hostInput->setMinimumSize(200, 30);
     QLineEdit *portInput = new QLineEdit();
+    portInput->setMinimumSize(200, 30);
     QLineEdit *usernameInput = new QLineEdit();
+    usernameInput->setMinimumSize(200, 30);
     QLineEdit *password = new QLineEdit();
+    password->setMinimumSize(200, 30);
 
     formLayout->addRow(("Name: "), connectNameInput);
     formLayout->addRow("Host: ", hostInput);
@@ -82,12 +97,12 @@ void MainWindow::loginLayout(QMainWindow *mainWindow)
     formLayout->addRow(tr("Username: "), usernameInput);
     formLayout->addRow(tr("Password: "), password);
     formLayout->setRowWrapPolicy(QFormLayout::DontWrapRows);
+    formLayout->setContentsMargins(50, 100, 50, 50);
 
     groupBox->setLayout(formLayout);
-    groupBox->setMaximumWidth(400);
-    //groupBox->setAlignment(Qt::AlignRight);
+    groupBox->setMinimumWidth(300);
 
-    mainWindow->setCentralWidget(groupBox);
+    return groupBox;
 }
 
 
