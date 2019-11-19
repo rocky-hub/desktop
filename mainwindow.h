@@ -14,6 +14,7 @@
 #include <QLabel>
 #include <QLineEdit>
 #include <QHBoxLayout>
+#include <QPushButton>
 #include "fileSystem.h"
 
 class MainWindow : public QMainWindow

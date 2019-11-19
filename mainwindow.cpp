@@ -92,12 +92,15 @@ QWidget* MainWindow::loginLayout()
     usernameInput->setMinimumSize(200, 30);
     QLineEdit *password = new QLineEdit();
     password->setMinimumSize(200, 30);
+    QPushButton *button = new QPushButton("connect");
+    button->setFixedWidth(120);
 
     formLayout->addRow(("Name: "), connectNameInput);
     formLayout->addRow("Host: ", hostInput);
     formLayout->addRow(tr("Port: "), portInput);
     formLayout->addRow(tr("Username: "), usernameInput);
     formLayout->addRow(tr("Password: "), password);
+    formLayout->addRow("", button);
     formLayout->setRowWrapPolicy(QFormLayout::DontWrapRows);
     formLayout->setContentsMargins(50, 100, 50, 50);
 

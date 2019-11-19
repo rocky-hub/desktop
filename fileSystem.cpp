@@ -5,7 +5,7 @@
 fileSystem::fileSystem()
 {
     this->openfile();
-    this->readConfig();
+    //this->readConfig();
     //this->writeConfig();
 }
 
