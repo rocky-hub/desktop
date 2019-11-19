@@ -14,6 +14,7 @@
 #include <QLabel>
 #include <QLineEdit>
 #include <QHBoxLayout>
+#include "fileSystem.h"
 
 class MainWindow : public QMainWindow
 {
@@ -31,6 +32,7 @@ public:
     QToolBar *toolBar;
     QWidget *centralWidget;
     QGroupBox *formGroupBox;
+    fileSystem *fileHandle;
 
 };
 #endif // MAINWINDOW_H

@@ -5,6 +5,8 @@ MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
 {
     this->setupUi(this);
+
+    this->fileHandle = new fileSystem();
 }
 
 MainWindow::~MainWindow()
