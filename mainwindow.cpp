@@ -37,7 +37,9 @@ void MainWindow::initCentralWidget(QMainWindow *mainWindow)
 
     QWidget *leftWidget = new QWidget(mainWindow);
     leftWidget->setStyleSheet("background: yellow");
-    QWidget *rightWidget = this->loginLayout();
+
+    login *loginUi = new login();
+    QWidget *rightWidget = loginUi->setLoginUi();
 
     mainSplitter->addWidget(leftWidget);
     mainSplitter->addWidget(rightWidget);
@@ -74,40 +76,6 @@ void MainWindow::initMenubar(QMainWindow *mainWindow)
 void MainWindow::initToolbar(QMainWindow *mainWindow)
 {
     //toolBar = new QToolBar(mainWindow);
-}
-
-QWidget* MainWindow::loginLayout()
-{
-    QGroupBox *groupBox = new QGroupBox();
-
-    QFormLayout *formLayout = new QFormLayout;
-
-    QLineEdit *connectNameInput = new QLineEdit();
-    connectNameInput->setMinimumSize(200, 30);
-    QLineEdit *hostInput = new QLineEdit();
-    hostInput->setMinimumSize(200, 30);
-    QLineEdit *portInput = new QLineEdit();
-    portInput->setMinimumSize(200, 30);
-    QLineEdit *usernameInput = new QLineEdit();
-    usernameInput->setMinimumSize(200, 30);
-    QLineEdit *password = new QLineEdit();
-    password->setMinimumSize(200, 30);
-    QPushButton *button = new QPushButton("connect");
-    button->setFixedWidth(120);
-
-    formLayout->addRow(("Name: "), connectNameInput);
-    formLayout->addRow("Host: ", hostInput);
-    formLayout->addRow(tr("Port: "), portInput);
-    formLayout->addRow(tr("Username: "), usernameInput);
-    formLayout->addRow(tr("Password: "), password);
-    formLayout->addRow("", button);
-    formLayout->setRowWrapPolicy(QFormLayout::DontWrapRows);
-    formLayout->setContentsMargins(50, 100, 50, 50);
-
-    groupBox->setLayout(formLayout);
-    groupBox->setMinimumWidth(300);
-
-    return groupBox;
 }
 
 

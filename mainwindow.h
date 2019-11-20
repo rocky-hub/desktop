@@ -16,6 +16,7 @@
 #include <QHBoxLayout>
 #include <QPushButton>
 #include "fileSystem.h"
+#include "login.h"
 
 class MainWindow : public QMainWindow
 {
@@ -34,6 +35,7 @@ public:
     QWidget *centralWidget;
     QGroupBox *formGroupBox;
     fileSystem *fileHandle;
+    QWidget *loginUi;
 
 };
 #endif // MAINWINDOW_H
