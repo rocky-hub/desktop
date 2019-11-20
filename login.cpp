@@ -56,17 +56,16 @@ void login::acceptLogin()
     QString password = this->password->text();
 
     QJsonObject jsonObj;
+    jsonObj.insert("name", name);
+    jsonObj.insert("host", host);
+    jsonObj.insert("port", port);
+    jsonObj.insert("username", username);
+    jsonObj.insert("password", password);
 
-    //QMap<QString, QString> map;
-    jsonObj.insert("name", this->name->text());
-    jsonObj.insert("host", this->host->text());
-    jsonObj.insert("port", this->port->text());
-    jsonObj.insert("username", this->username->text());
-    jsonObj.insert("password", this->password->text());
+    jsonObj.insert(name, jsonObj);
 
     this->fileHandle = new fileSystem();
     this->fileHandle->writeConfig(jsonObj);
-    //qDebug() << name << host << port << username << password;
 }
 
 login::~login()

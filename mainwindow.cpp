@@ -6,8 +6,8 @@ MainWindow::MainWindow(QWidget *parent)
 {
     this->setupUi(this);
 
-    this->fileHandle = new fileSystem();
-    this->fileHandle->readConfig();
+    //this->fileHandle = new fileSystem();
+    //this->fileHandle->readConfig();
 }
 
 MainWindow::~MainWindow()

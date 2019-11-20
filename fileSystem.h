@@ -23,6 +23,7 @@ public:
     void openfile();
     void readConfig();
     void writeConfig(QJsonObject jsonObj);
+    void clear();
 
     QFile *fileHandle;
 };
