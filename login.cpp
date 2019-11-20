@@ -7,43 +7,66 @@ login::login(QObject *parent) : QObject(parent)
 
 QWidget *login::setLoginUi()
 {
-    QGroupBox *groupBox = new QGroupBox();
-
     QFormLayout *formLayout = new QFormLayout;
 
-    QLineEdit *connectNameInput = new QLineEdit();
-    connectNameInput->setMinimumSize(200, 30);
-    QLineEdit *hostInput = new QLineEdit();
-    hostInput->setMinimumSize(200, 30);
-    QLineEdit *portInput = new QLineEdit();
-    portInput->setMinimumSize(200, 30);
-    QLineEdit *usernameInput = new QLineEdit();
-    usernameInput->setMinimumSize(200, 30);
-    QLineEdit *password = new QLineEdit();
-    password->setMinimumSize(200, 30);
-    QPushButton *button = new QPushButton("connect");
-    button->setFixedWidth(120);
+    this->name = new QLineEdit();
+    this->name->setMinimumSize(200, 30);
 
-    formLayout->addRow("Name: ", connectNameInput);
-    formLayout->addRow("Host: ", hostInput);
-    formLayout->addRow("Port: ", portInput);
-    formLayout->addRow("Username: ", usernameInput);
-    formLayout->addRow("Password: ", password);
-    formLayout->addRow("", button);
+    this->host = new QLineEdit();
+    this->host->setMinimumSize(200, 30);
+
+    this->port = new QLineEdit();
+    this->port->setMinimumSize(200, 30);
+    this->port->setPlaceholderText("3306");
+
+    this->username = new QLineEdit();
+    this->username->setMinimumSize(200, 30);
+
+    this->password = new QLineEdit();
+    this->password->setMinimumSize(200, 30);
+    this->password->setEchoMode(QLineEdit::PasswordEchoOnEdit);
+
+    this->buttonConnect = new QPushButton("connect");
+    this->buttonConnect->setFixedWidth(120);
+
+    formLayout->addRow("Name: ", this->name);
+    formLayout->addRow("Host: ", this->host);
+    formLayout->addRow("Port: ", this->port);
+    formLayout->addRow("Username: ", this->username);
+    formLayout->addRow("Password: ", this->password);
+    formLayout->addRow("", this->buttonConnect);
     formLayout->setRowWrapPolicy(QFormLayout::DontWrapRows);
     formLayout->setContentsMargins(50, 100, 50, 50);
 
+    QGroupBox *groupBox = new QGroupBox();
     groupBox->setLayout(formLayout);
     groupBox->setMinimumWidth(300);
 
-    connect(button, SIGNAL(clicked()), this, SLOT(acceptLogin()));
+    connect(this->buttonConnect, SIGNAL(clicked()), this, SLOT(acceptLogin()));
 
     return groupBox;
 }
 
 void login::acceptLogin()
 {
-    qDebug() << "singal";
+    QString name = this->name->text();
+    QString host = this->host->text();
+    QString port = this->port->text();
+    QString username = this->username->text();
+    QString password = this->password->text();
+
+    QJsonObject jsonObj;
+
+    //QMap<QString, QString> map;
+    jsonObj.insert("name", this->name->text());
+    jsonObj.insert("host", this->host->text());
+    jsonObj.insert("port", this->port->text());
+    jsonObj.insert("username", this->username->text());
+    jsonObj.insert("password", this->password->text());
+
+    this->fileHandle = new fileSystem();
+    this->fileHandle->writeConfig(jsonObj);
+    //qDebug() << name << host << port << username << password;
 }
 
 login::~login()

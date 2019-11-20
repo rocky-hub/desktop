@@ -9,6 +9,10 @@
 #include <QWidget>
 #include <QDebug>
 #include <QObject>
+#include <QString>
+#include <QMap>
+#include <QJsonObject>
+#include "fileSystem.h"
 
 class login : public QObject
 {
@@ -18,6 +22,13 @@ public:
     explicit login(QObject *parent = nullptr);
     ~login();
     QWidget *setLoginUi();
+    QLineEdit *name;
+    QLineEdit *host;
+    QLineEdit *port;
+    QLineEdit *username;
+    QLineEdit *password;
+    QPushButton *buttonConnect;
+    fileSystem *fileHandle;
 
 signals:
 

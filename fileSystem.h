@@ -12,6 +12,7 @@
 #include <QJsonDocument>
 #include <QJsonParseError>
 #include <QJsonValue>
+#include <QMap>
 
 class fileSystem
 {
@@ -21,7 +22,7 @@ public:
 
     void openfile();
     void readConfig();
-    void writeConfig();
+    void writeConfig(QJsonObject jsonObj);
 
     QFile *fileHandle;
 };

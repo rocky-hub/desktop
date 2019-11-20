@@ -23,22 +23,16 @@ void fileSystem::readConfig()
     }
 
     QJsonObject jsonObj = jsonDoc.object();
-    qDebug() << jsonObj.value("host");
+    qDebug() << jsonObj.value("host").toString();
 }
 
-void fileSystem::writeConfig()
+void fileSystem::writeConfig(QJsonObject jsonObj)
 {
-    QJsonObject jsonObj;
-    jsonObj.insert("host", "127.0.0.1");
-    jsonObj.insert("name", "test-db");
-
     QJsonDocument jsonDoc;
     jsonDoc.setObject(jsonObj);
 
     this->fileHandle->write(jsonDoc.toJson());
     this->fileHandle->close();
-
-    qDebug() << "json";
 }
 
 void fileSystem::openfile()
