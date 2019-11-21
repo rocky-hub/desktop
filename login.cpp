@@ -83,12 +83,20 @@ QWidget *login::setListWidget()
         listWidget->addItem(new QListWidgetItem(QIcon(":/dbresource/database-small.ico"), jsonObj.value("name").toString()));
     }
 
+    connect(listWidget, SIGNAL(itemClicked(QListWidgetItem *)), this, SLOT(singleClicked(QListWidgetItem*)));
+    connect(listWidget, SIGNAL(itemDoubleClicked(QListWidgetItem *)), this, SLOT(doubleClicked(QListWidgetItem*)));
+
     return listWidget;
 }
 
-void login::bindLogin()
+void login::singleClicked(QListWidgetItem *item)
 {
+    qDebug() << item->text() << "22";
+}
 
+void login::doubleClicked(QListWidgetItem *item)
+{
+    qDebug() << item->text() << "2332";
 }
 
 login::~login()

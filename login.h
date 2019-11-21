@@ -37,7 +37,8 @@ signals:
 
 public slots:
     void acceptLogin();
-    void bindLogin();
+    void singleClicked(QListWidgetItem *item);
+    void doubleClicked(QListWidgetItem *item);
 };
 
 #endif // LOGIN_H
