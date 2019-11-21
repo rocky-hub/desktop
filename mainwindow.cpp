@@ -36,10 +36,9 @@ void MainWindow::initCentralWidget(QMainWindow *mainWindow)
     mainSplitter->setHandleWidth(3);
     mainSplitter->setChildrenCollapsible(false);
 
-    QWidget *leftWidget = new QWidget(mainWindow);
-    leftWidget->setStyleSheet("background: yellow");
-
     login *loginUi = new login();
+
+    QWidget *leftWidget = loginUi->setListWidget();
     QWidget *rightWidget = loginUi->setLoginUi();
 
     mainSplitter->addWidget(leftWidget);

@@ -68,6 +68,29 @@ void login::acceptLogin()
     this->fileHandle->writeConfig(jsonObj);
 }
 
+QWidget *login::setListWidget()
+{
+    this->fileHandle = new fileSystem();
+    QJsonObject config = this->fileHandle->readConfig();
+
+    QJsonObject::Iterator it;
+
+    QListWidget *listWidget = new QListWidget();
+
+    for (it = config.begin(); it != config.end(); it++) {
+        QJsonObject jsonObj = it.value().toObject();
+        qDebug() << jsonObj.value("name").toString();
+        listWidget->addItem(new QListWidgetItem(QIcon(":/dbresource/database-small.ico"), jsonObj.value("name").toString()));
+    }
+
+    return listWidget;
+}
+
+void login::bindLogin()
+{
+
+}
+
 login::~login()
 {
 

@@ -10,8 +10,9 @@
 #include <QDebug>
 #include <QObject>
 #include <QString>
-#include <QMap>
 #include <QJsonObject>
+#include <QListWidget>
+#include <QListWidgetItem>
 #include "fileSystem.h"
 
 class login : public QObject
@@ -22,6 +23,8 @@ public:
     explicit login(QObject *parent = nullptr);
     ~login();
     QWidget *setLoginUi();
+    QWidget *setListWidget();
+
     QLineEdit *name;
     QLineEdit *host;
     QLineEdit *port;
@@ -34,6 +37,7 @@ signals:
 
 public slots:
     void acceptLogin();
+    void bindLogin();
 };
 
 #endif // LOGIN_H

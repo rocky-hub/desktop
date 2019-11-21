@@ -8,7 +8,7 @@ fileSystem::fileSystem()
     //this->writeConfig();
 }
 
-void fileSystem::readConfig()
+QJsonObject fileSystem::readConfig()
 {
     this->openfile(QIODevice::ReadOnly);
     QByteArray config = this->fileHandle->readAll();
@@ -20,11 +20,12 @@ void fileSystem::readConfig()
     if (jsonError.error != QJsonParseError::NoError) {
         this->clear();
         qDebug() << "json error";
-        return;
     }
 
     QJsonObject jsonObj = jsonDoc.object();
-    qDebug() << jsonObj.value("host").toString();
+
+    return jsonObj;
+    //qDebug() << jsonObj.value("host").toString();
 }
 
 void fileSystem::writeConfig(QJsonObject jsonObj)

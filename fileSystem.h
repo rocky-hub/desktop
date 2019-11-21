@@ -21,7 +21,7 @@ public:
     ~fileSystem();
 
     void openfile(QIODevice::OpenModeFlag mode);
-    void readConfig();
+    QJsonObject readConfig();
     void writeConfig(QJsonObject jsonObj);
     void clear();
 
