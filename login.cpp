@@ -14,10 +14,12 @@ QWidget *login::setLoginUi()
 
     this->host = new QLineEdit();
     this->host->setMinimumSize(200, 30);
+    this->host->setText("127.0.0.1");
 
     this->port = new QLineEdit();
     this->port->setMinimumSize(200, 30);
     this->port->setPlaceholderText("3306");
+    this->port->setText("3306");
 
     this->username = new QLineEdit();
     this->username->setMinimumSize(200, 30);
@@ -61,8 +63,6 @@ void login::acceptLogin()
     jsonObj.insert("port", port);
     jsonObj.insert("username", username);
     jsonObj.insert("password", password);
-
-    jsonObj.insert(name, jsonObj);
 
     this->fileHandle = new fileSystem();
     this->fileHandle->writeConfig(jsonObj);

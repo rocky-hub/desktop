@@ -10,7 +10,7 @@ fileSystem::fileSystem()
 
 void fileSystem::readConfig()
 {
-    this->openfile();
+    this->openfile(QIODevice::ReadOnly);
     QByteArray config = this->fileHandle->readAll();
     this->fileHandle->close();
 
@@ -29,34 +29,44 @@ void fileSystem::readConfig()
 
 void fileSystem::writeConfig(QJsonObject jsonObj)
 {
-    this->openfile();
+    this->openfile(QIODevice::ReadOnly);
+
+    QJsonObject configObj;
+    QString name = jsonObj.value("name").toString();
 
     QByteArray config = this->fileHandle->readAll();
+    this->fileHandle->close();
+
     if (!config.isEmpty()) {
         QJsonParseError jsonError;
         QJsonDocument existJsonDoc(QJsonDocument::fromJson(config, &jsonError));
 
         if (jsonError.error != QJsonParseError::NoError) {
-            this->clear();
             qDebug() << "json error";
         } else {
-            QJsonObject existJsonObj = existJsonDoc.object();
-            qDebug() << existJsonObj << "exist json";
+            configObj = existJsonDoc.object();
+
+            if (configObj.contains(name)) {
+                configObj.remove(name);
+            }
         }
     }
 
-    QJsonDocument jsonDoc;
-    jsonDoc.setObject(jsonObj);
+    configObj.insert(name, jsonObj);
 
-    //qDebug() << jsonDoc.toJson();
+    QJsonDocument jsonDoc;
+    jsonDoc.setObject(configObj);
+
+    this->openfile(QIODevice::WriteOnly);
     this->fileHandle->write(jsonDoc.toJson());
     this->fileHandle->close();
+    this->fileHandle->destroyed();
 }
 
-void fileSystem::openfile()
+void fileSystem::openfile(QIODevice::OpenModeFlag mode = QIODevice::ReadWrite)
 {
     this->fileHandle = new QFile("config.json");
-    if (!this->fileHandle->open(QIODevice::ReadWrite)) {
+    if (!this->fileHandle->open(mode)) {
         qDebug() << "file open error";
         return;
     }
@@ -65,7 +75,7 @@ void fileSystem::openfile()
 void fileSystem::clear()
 {
     this->fileHandle = new QFile("config.json");
-    this->fileHandle->open(QIODevice::ReadWrite | QIODevice::Truncate);
+    this->fileHandle->open(QIODevice:: WriteOnly | QIODevice::Truncate);
     this->fileHandle->close();
 }
 

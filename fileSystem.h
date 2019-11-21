@@ -20,7 +20,7 @@ public:
     fileSystem();
     ~fileSystem();
 
-    void openfile();
+    void openfile(QIODevice::OpenModeFlag mode);
     void readConfig();
     void writeConfig(QJsonObject jsonObj);
     void clear();
