@@ -32,8 +32,10 @@ public:
     QLineEdit *password;
     QPushButton *buttonConnect;
     FileSystem *fileHandle;
+    QWidget *mainWindow;
 
 signals:
+    void reloadCentralWidget();
 
 public slots:
     void acceptLogin();

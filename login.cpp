@@ -45,6 +45,7 @@ QWidget *Login::setLoginUi()
     groupBox->setMinimumWidth(300);
 
     connect(this->buttonConnect, SIGNAL(clicked()), this, SLOT(acceptLogin()));
+    connect(this, SIGNAL(reloadCentralWidget()), this->parent(), SLOT(reloadCentralWidget()));
 
     return groupBox;
 }
@@ -66,6 +67,8 @@ void Login::acceptLogin()
 
     this->fileHandle = new FileSystem();
     this->fileHandle->writeConfig(jsonObj);
+
+    emit reloadCentralWidget();
 }
 
 QWidget *Login::setListWidget()
@@ -82,7 +85,7 @@ QWidget *Login::setListWidget()
         listWidget->addItem(new QListWidgetItem(QIcon(":/dbresource/database-small.ico"), jsonObj.value("name").toString()));
     }
 
-    listWidget->setMaximumWidth(300);
+    listWidget->setMaximumWidth(270);
     connect(listWidget, SIGNAL(itemClicked(QListWidgetItem *)), this, SLOT(singleClicked(QListWidgetItem*)));
     connect(listWidget, SIGNAL(itemDoubleClicked(QListWidgetItem *)), this, SLOT(doubleClicked(QListWidgetItem*)));
 

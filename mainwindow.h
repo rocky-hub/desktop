@@ -15,6 +15,7 @@
 #include <QLineEdit>
 #include <QHBoxLayout>
 #include <QPushButton>
+#include <QTextEdit>
 #include "filesystem.h"
 #include "login.h"
 
@@ -29,7 +30,6 @@ public:
     void initMenubar(QMainWindow *mainWindow);
     void initToolbar(QMainWindow *mainWindow);
     void initCentralWidget(QMainWindow *mainWindow);
-    void reloadCentralWidget(QMainWindow *mainWindow);
     QWidget *loginLayout();
     QMenuBar *menuBar;
     QToolBar *toolBar;
@@ -39,5 +39,9 @@ public:
     QWidget *loginUi;
     QWidget *home;
 
+signals:
+
+public slots:
+    void reloadCentralWidget();
 };
 #endif // MAINWINDOW_H

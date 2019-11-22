@@ -19,11 +19,11 @@ void MainWindow::setupUi(QMainWindow *mainWindow)
 
     mainWindow->setWindowIcon(QIcon(":/dbresource/database.ico"));
     mainWindow->setWindowTitle("rockySQL");
-    mainWindow->resize(1000, 600);
+    mainWindow->resize(1200, 800);
 
     this->initMenubar(mainWindow);
     this->initToolbar(mainWindow);
-    //this->initCentralWidget(mainWindow);
+    this->initCentralWidget(mainWindow);
 }
 
 void MainWindow::initCentralWidget(QMainWindow *mainWindow)
@@ -33,7 +33,7 @@ void MainWindow::initCentralWidget(QMainWindow *mainWindow)
     mainSplitter->setHandleWidth(3);
     mainSplitter->setChildrenCollapsible(false);
 
-    Login *loginUi = new Login();
+    Login *loginUi = new Login(mainWindow);
 
     QWidget *leftWidget = loginUi->setListWidget();
     QWidget *rightWidget = loginUi->setLoginUi();
@@ -44,9 +44,29 @@ void MainWindow::initCentralWidget(QMainWindow *mainWindow)
     setCentralWidget(mainSplitter);
 }
 
-void MainWindow::reloadCentralWidget(QMainWindow *mainWindow)
+void MainWindow::reloadCentralWidget()
 {
+    QMainWindow *mainWindow = this;
 
+    QSplitter *mainSplitter = new QSplitter(Qt::Horizontal, mainWindow);
+    mainSplitter->setFrameStyle(QFrame::NoFrame);
+    mainSplitter->setHandleWidth(3);
+    mainSplitter->setChildrenCollapsible(false);
+
+    QWidget *leftWidget = new QWidget();
+    leftWidget->setMaximumWidth(270);
+    leftWidget->setMinimumWidth(150);
+    mainSplitter->addWidget(leftWidget);
+
+    QSplitter *rightSplitter = new QSplitter(Qt::Vertical, mainSplitter);
+    QTextEdit *rightTopWidget = new QTextEdit("top right widget");
+    QTextEdit *rightBottomWidget = new QTextEdit("right bottom widegt");
+    rightSplitter->addWidget(rightTopWidget);
+    rightSplitter->addWidget(rightBottomWidget);
+
+    mainSplitter->addWidget(rightSplitter);
+
+    setCentralWidget(mainSplitter);
 }
 
 void MainWindow::initMenubar(QMainWindow *mainWindow)
