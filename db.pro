@@ -19,12 +19,16 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     fileSystem.cpp \
-    login.cpp
+    login.cpp \
+    home.cpp \
+    mysql.cpp
 
 HEADERS += \
     mainwindow.h \
     fileSystem.h \
-    login.h
+    login.h \
+    home.h \
+    mysql.h
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
