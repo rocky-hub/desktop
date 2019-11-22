@@ -14,6 +14,7 @@
 #include <QListWidget>
 #include <QListWidgetItem>
 #include "filesystem.h"
+#include "mysql.h"
 
 class Login : public QObject
 {
@@ -30,9 +31,10 @@ public:
     QLineEdit *port;
     QLineEdit *username;
     QLineEdit *password;
+    QLineEdit *database;
     QPushButton *buttonConnect;
     FileSystem *fileHandle;
-    QWidget *mainWindow;
+    Mysql *mysqlHandle;
 
 signals:
     void reloadCentralWidget();

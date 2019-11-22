@@ -18,6 +18,7 @@
 #include <QTextEdit>
 #include "filesystem.h"
 #include "login.h"
+#include "mysql.h"
 
 class MainWindow : public QMainWindow
 {
@@ -38,6 +39,7 @@ public:
     FileSystem *fileHandle;
     QWidget *loginUi;
     QWidget *home;
+    Mysql *mysqlHandle;
 
 signals:
 

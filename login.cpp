@@ -11,6 +11,7 @@ QWidget *Login::setLoginUi()
 
     this->name = new QLineEdit();
     this->name->setMinimumSize(200, 30);
+    this->name->setPlaceholderText("optional");
 
     this->host = new QLineEdit();
     this->host->setMinimumSize(200, 30);
@@ -28,6 +29,10 @@ QWidget *Login::setLoginUi()
     this->password->setMinimumSize(200, 30);
     this->password->setEchoMode(QLineEdit::PasswordEchoOnEdit);
 
+    this->database = new QLineEdit();
+    this->database->setMinimumSize(200, 30);
+    this->database->setPlaceholderText("optional");
+
     this->buttonConnect = new QPushButton("connect");
     this->buttonConnect->setFixedWidth(120);
 
@@ -36,6 +41,7 @@ QWidget *Login::setLoginUi()
     formLayout->addRow("Port: ", this->port);
     formLayout->addRow("Username: ", this->username);
     formLayout->addRow("Password: ", this->password);
+    formLayout->addRow("Database", this->database);
     formLayout->addRow("", this->buttonConnect);
     formLayout->setRowWrapPolicy(QFormLayout::DontWrapRows);
     formLayout->setContentsMargins(50, 100, 50, 50);
@@ -65,10 +71,15 @@ void Login::acceptLogin()
     jsonObj.insert("username", username);
     jsonObj.insert("password", password);
 
-    this->fileHandle = new FileSystem();
-    this->fileHandle->writeConfig(jsonObj);
+    mysqlHandle = new Mysql;
+    if (mysqlHandle->setConnect(jsonObj)) {
+        this->fileHandle = new FileSystem();
+        this->fileHandle->writeConfig(jsonObj);
 
-    emit reloadCentralWidget();
+        emit reloadCentralWidget();
+    } else {
+        qDebug() << mysqlHandle->connectError();
+    }
 }
 
 QWidget *Login::setListWidget()

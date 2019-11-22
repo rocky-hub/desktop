@@ -46,9 +46,7 @@ void MainWindow::initCentralWidget(QMainWindow *mainWindow)
 
 void MainWindow::reloadCentralWidget()
 {
-    QMainWindow *mainWindow = this;
-
-    QSplitter *mainSplitter = new QSplitter(Qt::Horizontal, mainWindow);
+    QSplitter *mainSplitter = new QSplitter(Qt::Horizontal, this);
     mainSplitter->setFrameStyle(QFrame::NoFrame);
     mainSplitter->setHandleWidth(3);
     mainSplitter->setChildrenCollapsible(false);
