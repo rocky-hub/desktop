@@ -79,10 +79,10 @@ QWidget *login::setListWidget()
 
     for (it = config.begin(); it != config.end(); it++) {
         QJsonObject jsonObj = it.value().toObject();
-        qDebug() << jsonObj.value("name").toString();
         listWidget->addItem(new QListWidgetItem(QIcon(":/dbresource/database-small.ico"), jsonObj.value("name").toString()));
     }
 
+    listWidget->setMaximumWidth(300);
     connect(listWidget, SIGNAL(itemClicked(QListWidgetItem *)), this, SLOT(singleClicked(QListWidgetItem*)));
     connect(listWidget, SIGNAL(itemDoubleClicked(QListWidgetItem *)), this, SLOT(doubleClicked(QListWidgetItem*)));
 
@@ -90,8 +90,17 @@ QWidget *login::setListWidget()
 }
 
 void login::singleClicked(QListWidgetItem *item)
-{
-    qDebug() << item->text() << "22";
+{    
+    QString name = item->text();
+    this->fileHandle = new fileSystem();
+    QJsonObject config = this->fileHandle->readConfig();
+    QJsonObject jsonObj = config.value(name).toObject();
+
+    this->name->setText(jsonObj.value("name").toString());
+    this->host->setText(jsonObj.value("host").toString());
+    this->port->setText(jsonObj.value("port").toString());
+    this->username->setText(jsonObj.value("username").toString());
+    this->password->setText(jsonObj.value("password").toString());
 }
 
 void login::doubleClicked(QListWidgetItem *item)

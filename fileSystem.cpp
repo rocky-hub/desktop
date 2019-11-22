@@ -25,7 +25,6 @@ QJsonObject fileSystem::readConfig()
     QJsonObject jsonObj = jsonDoc.object();
 
     return jsonObj;
-    //qDebug() << jsonObj.value("host").toString();
 }
 
 void fileSystem::writeConfig(QJsonObject jsonObj)
