@@ -2,13 +2,19 @@
 #define HOME_H
 
 #include <QWidget>
+#include "mysql.h"
 
-class home : public QWidget
+class Home : public QWidget
 {
     Q_OBJECT
 public:
-    explicit home(QWidget *parent = nullptr);
-
+    explicit Home(QWidget *parent = nullptr);
+    QWidget *setCentralWidget();
+    QWidget *setLeftWidget();
+    QWidget *setRightWidget();
+    QWidget *setTableWidget();
+    QWidget *setCommandWidget();
+    Mysql *mysqlHandle;
 signals:
 
 public slots:

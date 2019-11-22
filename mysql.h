@@ -3,11 +3,11 @@
 
 #include <QWidget>
 
-class mysql : public QWidget
+class Mysql : public QWidget
 {
     Q_OBJECT
 public:
-    explicit mysql(QWidget *parent = nullptr);
+    explicit Mysql(QWidget *parent = nullptr);
 
 signals:
 

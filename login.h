@@ -13,15 +13,15 @@
 #include <QJsonObject>
 #include <QListWidget>
 #include <QListWidgetItem>
-#include "fileSystem.h"
+#include "filesystem.h"
 
-class login : public QObject
+class Login : public QObject
 {
     Q_OBJECT
 
 public:
-    explicit login(QObject *parent = nullptr);
-    ~login();
+    explicit Login(QObject *parent = nullptr);
+    ~Login();
     QWidget *setLoginUi();
     QWidget *setListWidget();
 
@@ -31,7 +31,7 @@ public:
     QLineEdit *username;
     QLineEdit *password;
     QPushButton *buttonConnect;
-    fileSystem *fileHandle;
+    FileSystem *fileHandle;
 
 signals:
 

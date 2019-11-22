@@ -1,14 +1,14 @@
-#include "fileSystem.h"
+#include "filesystem.h"
 #include <QFile>
 #include <QFileInfo>
 
-fileSystem::fileSystem()
+FileSystem::FileSystem()
 {
     //this->readConfig();
     //this->writeConfig();
 }
 
-QJsonObject fileSystem::readConfig()
+QJsonObject FileSystem::readConfig()
 {
     this->openfile(QIODevice::ReadOnly);
     QByteArray config = this->fileHandle->readAll();
@@ -27,7 +27,7 @@ QJsonObject fileSystem::readConfig()
     return jsonObj;
 }
 
-void fileSystem::writeConfig(QJsonObject jsonObj)
+void FileSystem::writeConfig(QJsonObject jsonObj)
 {
     this->openfile(QIODevice::ReadOnly);
 
@@ -63,7 +63,7 @@ void fileSystem::writeConfig(QJsonObject jsonObj)
     this->fileHandle->destroyed();
 }
 
-void fileSystem::openfile(QIODevice::OpenModeFlag mode = QIODevice::ReadWrite)
+void FileSystem::openfile(QIODevice::OpenModeFlag mode = QIODevice::ReadWrite)
 {
     this->fileHandle = new QFile("config.json");
     if (!this->fileHandle->open(mode)) {
@@ -72,14 +72,14 @@ void fileSystem::openfile(QIODevice::OpenModeFlag mode = QIODevice::ReadWrite)
     }
 }
 
-void fileSystem::clear()
+void FileSystem::clear()
 {
     this->fileHandle = new QFile("config.json");
     this->fileHandle->open(QIODevice:: WriteOnly | QIODevice::Truncate);
     this->fileHandle->close();
 }
 
-fileSystem::~fileSystem()
+FileSystem::~FileSystem()
 {
     this->fileHandle->close();
 }

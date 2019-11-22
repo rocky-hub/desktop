@@ -18,17 +18,17 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     main.cpp \
     mainwindow.cpp \
-    fileSystem.cpp \
     login.cpp \
     home.cpp \
-    mysql.cpp
+    mysql.cpp \
+    filesystem.cpp
 
 HEADERS += \
     mainwindow.h \
-    fileSystem.h \
     login.h \
     home.h \
-    mysql.h
+    mysql.h \
+    filesystem.h
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

@@ -1,6 +1,6 @@
 #include "mysql.h"
 
-mysql::mysql(QWidget *parent) : QWidget(parent)
+Mysql::Mysql(QWidget *parent) : QWidget(parent)
 {
 
 }

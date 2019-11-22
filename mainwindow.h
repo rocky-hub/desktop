@@ -15,7 +15,7 @@
 #include <QLineEdit>
 #include <QHBoxLayout>
 #include <QPushButton>
-#include "fileSystem.h"
+#include "filesystem.h"
 #include "login.h"
 
 class MainWindow : public QMainWindow
@@ -29,13 +29,15 @@ public:
     void initMenubar(QMainWindow *mainWindow);
     void initToolbar(QMainWindow *mainWindow);
     void initCentralWidget(QMainWindow *mainWindow);
+    void reloadCentralWidget(QMainWindow *mainWindow);
     QWidget *loginLayout();
     QMenuBar *menuBar;
     QToolBar *toolBar;
     QWidget *centralWidget;
     QGroupBox *formGroupBox;
-    fileSystem *fileHandle;
+    FileSystem *fileHandle;
     QWidget *loginUi;
+    QWidget *home;
 
 };
 #endif // MAINWINDOW_H

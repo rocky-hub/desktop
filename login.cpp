@@ -1,11 +1,11 @@
 #include "login.h"
 
-login::login(QObject *parent) : QObject(parent)
+Login::Login(QObject *parent) : QObject(parent)
 {
 
 }
 
-QWidget *login::setLoginUi()
+QWidget *Login::setLoginUi()
 {
     QFormLayout *formLayout = new QFormLayout;
 
@@ -49,7 +49,7 @@ QWidget *login::setLoginUi()
     return groupBox;
 }
 
-void login::acceptLogin()
+void Login::acceptLogin()
 {
     QString name = this->name->text();
     QString host = this->host->text();
@@ -64,13 +64,13 @@ void login::acceptLogin()
     jsonObj.insert("username", username);
     jsonObj.insert("password", password);
 
-    this->fileHandle = new fileSystem();
+    this->fileHandle = new FileSystem();
     this->fileHandle->writeConfig(jsonObj);
 }
 
-QWidget *login::setListWidget()
+QWidget *Login::setListWidget()
 {
-    this->fileHandle = new fileSystem();
+    this->fileHandle = new FileSystem();
     QJsonObject config = this->fileHandle->readConfig();
 
     QJsonObject::Iterator it;
@@ -89,10 +89,10 @@ QWidget *login::setListWidget()
     return listWidget;
 }
 
-void login::singleClicked(QListWidgetItem *item)
+void Login::singleClicked(QListWidgetItem *item)
 {    
     QString name = item->text();
-    this->fileHandle = new fileSystem();
+    this->fileHandle = new FileSystem();
     QJsonObject config = this->fileHandle->readConfig();
     QJsonObject jsonObj = config.value(name).toObject();
 
@@ -103,12 +103,12 @@ void login::singleClicked(QListWidgetItem *item)
     this->password->setText(jsonObj.value("password").toString());
 }
 
-void login::doubleClicked(QListWidgetItem *item)
+void Login::doubleClicked(QListWidgetItem *item)
 {
     qDebug() << item->text() << "2332";
 }
 
-login::~login()
+Login::~Login()
 {
 
 }

@@ -5,9 +5,6 @@ MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
 {
     this->setupUi(this);
-
-    //this->fileHandle = new fileSystem();
-    //this->fileHandle->readConfig();
 }
 
 MainWindow::~MainWindow()
@@ -26,7 +23,7 @@ void MainWindow::setupUi(QMainWindow *mainWindow)
 
     this->initMenubar(mainWindow);
     this->initToolbar(mainWindow);
-    this->initCentralWidget(mainWindow);
+    //this->initCentralWidget(mainWindow);
 }
 
 void MainWindow::initCentralWidget(QMainWindow *mainWindow)
@@ -36,7 +33,7 @@ void MainWindow::initCentralWidget(QMainWindow *mainWindow)
     mainSplitter->setHandleWidth(3);
     mainSplitter->setChildrenCollapsible(false);
 
-    login *loginUi = new login();
+    Login *loginUi = new Login();
 
     QWidget *leftWidget = loginUi->setListWidget();
     QWidget *rightWidget = loginUi->setLoginUi();
@@ -45,6 +42,11 @@ void MainWindow::initCentralWidget(QMainWindow *mainWindow)
     mainSplitter->addWidget(rightWidget);
 
     setCentralWidget(mainSplitter);
+}
+
+void MainWindow::reloadCentralWidget(QMainWindow *mainWindow)
+{
+
 }
 
 void MainWindow::initMenubar(QMainWindow *mainWindow)

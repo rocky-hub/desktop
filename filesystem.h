@@ -14,11 +14,11 @@
 #include <QJsonValue>
 #include <QMap>
 
-class fileSystem
+class FileSystem
 {
 public:
-    fileSystem();
-    ~fileSystem();
+    FileSystem();
+    ~FileSystem();
 
     void openfile(QIODevice::OpenModeFlag mode);
     QJsonObject readConfig();
