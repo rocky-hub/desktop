@@ -3,5 +3,8 @@
         <file>dbresource/database.ico</file>
         <file>dbresource/database.png</file>
         <file>dbresource/database-small.ico</file>
+        <file>dbresource/toolbar-content.png</file>
+        <file>dbresource/toolbar-structure.png</file>
+        <file>dbresource/toolbar-command.png</file>
     </qresource>
 </RCC>

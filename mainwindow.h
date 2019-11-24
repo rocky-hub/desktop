@@ -16,6 +16,7 @@
 #include <QHBoxLayout>
 #include <QPushButton>
 #include <QTextEdit>
+#include <QToolButton>
 #include "filesystem.h"
 #include "login.h"
 #include "mysql.h"

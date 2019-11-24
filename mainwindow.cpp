@@ -95,7 +95,14 @@ void MainWindow::initMenubar(QMainWindow *mainWindow)
 
 void MainWindow::initToolbar(QMainWindow *mainWindow)
 {
-    //toolBar = new QToolBar(mainWindow);
+    toolBar = new QToolBar(mainWindow);
+
+    QToolButton *pActionOpenBar = new QToolButton();
+    pActionOpenBar->setIcon(QIcon(":/dbresource/toolbar-content.png"));
+    pActionOpenBar->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
+    pActionOpenBar->setText("content");
+    toolBar->addWidget(pActionOpenBar);
+    addToolBar(toolBar);
 }
 
 
