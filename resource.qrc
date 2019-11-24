@@ -1,10 +1,10 @@
 <RCC>
     <qresource prefix="/">
-        <file>dbresource/database.ico</file>
-        <file>dbresource/database.png</file>
-        <file>dbresource/database-small.ico</file>
-        <file>dbresource/toolbar-content.png</file>
-        <file>dbresource/toolbar-structure.png</file>
-        <file>dbresource/toolbar-command.png</file>
+        <file>resource/images/database.ico</file>
+        <file>resource/images/database.png</file>
+        <file>resource/images/database-small.ico</file>
+        <file>resource/images/toolbar-command.png</file>
+        <file>resource/images/toolbar-content.png</file>
+        <file>resource/images/toolbar-structure.png</file>
     </qresource>
 </RCC>

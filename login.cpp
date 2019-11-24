@@ -93,7 +93,7 @@ QWidget *Login::setListWidget()
 
     for (it = config.begin(); it != config.end(); it++) {
         QJsonObject jsonObj = it.value().toObject();
-        listWidget->addItem(new QListWidgetItem(QIcon(":/dbresource/database-small.ico"), jsonObj.value("name").toString()));
+        listWidget->addItem(new QListWidgetItem(QIcon(":/resource/images/database-small.ico"), jsonObj.value("name").toString()));
     }
 
     listWidget->setMaximumWidth(270);

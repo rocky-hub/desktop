@@ -17,7 +17,7 @@ void MainWindow::setupUi(QMainWindow *mainWindow)
         mainWindow->setObjectName("main window");
     }
 
-    mainWindow->setWindowIcon(QIcon(":/dbresource/database.ico"));
+    mainWindow->setWindowIcon(QIcon(":/resource/images/database.ico"));
     mainWindow->setWindowTitle("rockySQL");
     mainWindow->resize(1200, 800);
 
@@ -98,7 +98,7 @@ void MainWindow::initToolbar(QMainWindow *mainWindow)
     toolBar = new QToolBar(mainWindow);
 
     QToolButton *pActionOpenBar = new QToolButton();
-    pActionOpenBar->setIcon(QIcon(":/dbresource/toolbar-content.png"));
+    pActionOpenBar->setIcon(QIcon(":/resource/images/toolbar-content.png"));
     pActionOpenBar->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
     pActionOpenBar->setText("content");
     toolBar->addWidget(pActionOpenBar);
