@@ -14,6 +14,11 @@ QJsonObject FileSystem::readConfig()
     QByteArray config = this->fileHandle->readAll();
     this->fileHandle->close();
 
+    if (config.isEmpty()) {
+        QJsonObject jsonObj;
+        return jsonObj;
+    }
+
     QJsonParseError jsonError;
     QJsonDocument jsonDoc(QJsonDocument::fromJson(config, &jsonError));
 
