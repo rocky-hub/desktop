@@ -64,15 +64,20 @@ void Login::acceptLogin()
     QString username = this->username->text();
     QString password = this->password->text();
 
+    name = name.isEmpty() ? host : name;
+
     QJsonObject jsonObj;
     jsonObj.insert("name", name);
     jsonObj.insert("host", host);
     jsonObj.insert("port", port);
     jsonObj.insert("username", username);
     jsonObj.insert("password", password);
+    jsonObj.insert("active", 0);
 
     mysqlHandle = new Mysql;
     if (mysqlHandle->setConnect(jsonObj)) {
+        jsonObj["active"] = 1;
+
         this->fileHandle = new FileSystem();
         this->fileHandle->writeConfig(jsonObj);
 
