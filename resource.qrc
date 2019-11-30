@@ -6,5 +6,6 @@
         <file>resource/images/toolbar-command.png</file>
         <file>resource/images/toolbar-content.png</file>
         <file>resource/images/toolbar-structure.png</file>
+        <file>resource/images/toolbar-table-info.png</file>
     </qresource>
 </RCC>

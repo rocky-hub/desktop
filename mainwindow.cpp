@@ -97,11 +97,30 @@ void MainWindow::initToolbar(QMainWindow *mainWindow)
 {
     toolBar = new QToolBar(mainWindow);
 
-    QToolButton *pActionOpenBar = new QToolButton();
-    pActionOpenBar->setIcon(QIcon(":/resource/images/toolbar-content.png"));
-    pActionOpenBar->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
-    pActionOpenBar->setText("content");
-    toolBar->addWidget(pActionOpenBar);
+    QToolButton *structureTool = new QToolButton();
+    structureTool->setIcon(QIcon(":/resource/images/toolbar-structure.png"));
+    structureTool->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
+    structureTool->setText("structure");
+    toolBar->addWidget(structureTool);
+
+    QToolButton *contentTool = new QToolButton();
+    contentTool->setIcon(QIcon(":/resource/images/toolbar-content.png"));
+    contentTool->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
+    contentTool->setText("content");
+    toolBar->addWidget(contentTool);
+
+    QToolButton *tableInfoTool = new QToolButton();
+    tableInfoTool->setIcon(QIcon(":/resource/images/toolbar-table-info.png"));
+    tableInfoTool->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
+    tableInfoTool->setText("table info");
+    toolBar->addWidget(tableInfoTool);
+
+    QToolButton *commandTool = new QToolButton();
+    commandTool->setIcon(QIcon(":/resource/images/toolbar-command.png"));
+    commandTool->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
+    commandTool->setText("command");
+    toolBar->addWidget(commandTool);
+
     addToolBar(toolBar);
 }
 
