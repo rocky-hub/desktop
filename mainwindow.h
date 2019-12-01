@@ -20,6 +20,7 @@
 #include "filesystem.h"
 #include "login.h"
 #include "mysql.h"
+#include "home.h"
 
 class MainWindow : public QMainWindow
 {
@@ -39,7 +40,7 @@ public:
     QGroupBox *formGroupBox;
     FileSystem *fileHandle;
     QWidget *loginUi;
-    QWidget *home;
+    Home *homeHandle;
     Mysql *mysqlHandle;
 
 signals:

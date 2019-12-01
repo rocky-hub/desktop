@@ -6,6 +6,7 @@
 #include <QSqlDatabase>
 #include <QSqlQuery>
 #include <QJsonObject>
+#include <QVector>
 #include <QDebug>
 
 class Mysql : public QWidget
@@ -19,6 +20,7 @@ public:
     QString connectError();
 
     QSqlDatabase dbHandle;
+    QVector<QString> dbInstances;
 
 signals:
 

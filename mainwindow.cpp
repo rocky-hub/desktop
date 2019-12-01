@@ -46,25 +46,8 @@ void MainWindow::initCentralWidget(QMainWindow *mainWindow)
 
 void MainWindow::reloadCentralWidget()
 {
-    QSplitter *mainSplitter = new QSplitter(Qt::Horizontal, this);
-    mainSplitter->setFrameStyle(QFrame::NoFrame);
-    mainSplitter->setHandleWidth(3);
-    mainSplitter->setChildrenCollapsible(false);
-
-    QWidget *leftWidget = new QWidget();
-    leftWidget->setMaximumWidth(270);
-    leftWidget->setMinimumWidth(150);
-    mainSplitter->addWidget(leftWidget);
-
-    QSplitter *rightSplitter = new QSplitter(Qt::Vertical, mainSplitter);
-    QTextEdit *rightTopWidget = new QTextEdit("top right widget");
-    QTextEdit *rightBottomWidget = new QTextEdit("right bottom widegt");
-    rightSplitter->addWidget(rightTopWidget);
-    rightSplitter->addWidget(rightBottomWidget);
-
-    mainSplitter->addWidget(rightSplitter);
-
-    setCentralWidget(mainSplitter);
+    this->homeHandle = new Home();
+    setCentralWidget(this->homeHandle->centralWidget());
 }
 
 void MainWindow::initMenubar(QMainWindow *mainWindow)
