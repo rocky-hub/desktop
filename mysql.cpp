@@ -29,8 +29,23 @@ void Mysql::setDatabase(QString database)
     query.exec(databaseSql);
 }
 
+void Mysql::databases()
+{
+    qDebug() << dbInstances.isEmpty();
+
+    QString databaseSql = "show databases;";
+
+    QSqlQuery query;
+    query.exec(databaseSql);
+
+    while (query.next()) {
+        qDebug() << query.value(0).toString();
+    }
+}
+
 void Mysql::tables()
 {
+    qDebug() << "show tables";
     QString databaseSql = "use test;";
 
     QSqlQuery query;

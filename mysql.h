@@ -5,6 +5,8 @@
 #include <QSqlError>
 #include <QSqlDatabase>
 #include <QSqlQuery>
+#include <QSqlRecord>
+#include <QSqlResult>
 #include <QJsonObject>
 #include <QVector>
 #include <QDebug>
@@ -16,6 +18,7 @@ public:
     explicit Mysql(QWidget *parent = nullptr);
     bool setConnect(QJsonObject jsonObj);
     void setDatabase(QString database);
+    void databases();
     void tables();
     QString connectError();
 

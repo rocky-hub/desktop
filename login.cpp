@@ -72,15 +72,14 @@ void Login::acceptLogin()
     jsonObj.insert("port", port);
     jsonObj.insert("username", username);
     jsonObj.insert("password", password);
-    jsonObj.insert("active", 0);
 
     mysqlHandle = new Mysql;
     if (mysqlHandle->setConnect(jsonObj)) {
-        jsonObj["active"] = 1;
-
         this->fileHandle = new FileSystem();
         this->fileHandle->writeConfig(jsonObj);
 
+        mysqlHandle->dbInstances.append(name);
+        //qDebug() << mysqlHandle->dbInstances[0];
         emit reloadCentralWidget();
     } else {
         qDebug() << mysqlHandle->connectError();

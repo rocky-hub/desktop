@@ -1,6 +1,6 @@
 #include "home.h"
 
-Home::Home(QWidget *parent) : QWidget(parent), mainWindow(mainWindow)
+Home::Home(QWidget *parent) : QWidget(parent)
 {
 
 }
@@ -29,12 +29,17 @@ QWidget *Home::leftWidget()
     leftWidget->setMaximumWidth(270);
     leftWidget->setMinimumWidth(150);
 
+    this->mysqlHandle = new Mysql;
+    this->mysqlHandle->databases();
+
     return leftWidget;
 }
 
 QWidget *Home::rightWidget()
 {
+    QWidget *obj = new QWidget();
 
+    return obj;
 }
 
 QWidget *Home::rightTopWidget()
@@ -54,10 +59,14 @@ QWidget *Home::rightButtomWidget()
 
 QWidget *Home::tableWidget()
 {
+    QWidget *obj = new QWidget();
 
+    return obj;
 }
 
 QWidget *Home::commandWidget()
 {
+    QWidget *obj = new QWidget();
 
+    return obj;
 }
