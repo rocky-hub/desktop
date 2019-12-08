@@ -6,6 +6,11 @@
 #include <QSplitter>
 #include "mysql.h"
 #include <QDebug>
+#include <QTreeWidget>
+#include <QTreeWidgetItem>
+#include <QStringList>
+#include <QList>
+#include <QHeaderView>
 
 class Home : public QWidget
 {

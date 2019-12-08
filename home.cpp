@@ -25,14 +25,24 @@ QWidget *Home::centralWidget()
 
 QWidget *Home::leftWidget()
 {
-    QWidget *leftWidget = new QWidget();
-    leftWidget->setMaximumWidth(270);
-    leftWidget->setMinimumWidth(150);
+    QTreeWidget *treeWidget = new QTreeWidget();
+    treeWidget->header()->setVisible(false);
+    treeWidget->setMaximumWidth(250);
+    treeWidget->setMinimumWidth(170);
+
+    QTreeWidgetItem *treeWidgetItem = new QTreeWidgetItem(treeWidget);
+    treeWidgetItem->setText(0, "111");
+
+    QTreeWidgetItem *treeWidgetItem1 = new QTreeWidgetItem(treeWidget);
+    treeWidgetItem1->setText(0, "222");
+
+    QTreeWidgetItem *treeWidgetItem3 = new QTreeWidgetItem(treeWidgetItem1);
+    treeWidgetItem3->setText(0,"222_222");
 
     Mysql& mysqlHandle = Mysql::getInstance();
     mysqlHandle.databases();
 
-    return leftWidget;
+    return treeWidget;
 }
 
 QWidget *Home::rightWidget()
