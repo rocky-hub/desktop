@@ -20,7 +20,6 @@ public:
     QWidget *tableWidget();
     QWidget *commandWidget();
     QWidget *mainWindow;
-    Mysql *mysqlHandle;
 signals:
 
 public slots:

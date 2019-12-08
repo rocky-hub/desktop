@@ -73,16 +73,18 @@ void Login::acceptLogin()
     jsonObj.insert("username", username);
     jsonObj.insert("password", password);
 
-    mysqlHandle = new Mysql;
-    if (mysqlHandle->setConnect(jsonObj)) {
+    Mysql& mysqlHandle = Mysql::getInstance();
+
+    if (mysqlHandle.setConnect(jsonObj)) {
         this->fileHandle = new FileSystem();
         this->fileHandle->writeConfig(jsonObj);
 
-        mysqlHandle->dbInstances.append(name);
-        //qDebug() << mysqlHandle->dbInstances[0];
+        mysqlHandle.dbInstances.append(name);
+
+        qDebug() << "singleton instance";
         emit reloadCentralWidget();
     } else {
-        qDebug() << mysqlHandle->connectError();
+        qDebug() << mysqlHandle.connectError();
     }
 }
 

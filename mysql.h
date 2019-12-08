@@ -14,8 +14,13 @@
 class Mysql : public QWidget
 {
     Q_OBJECT
+private:
+    Mysql() {}
+    Mysql(const Mysql&) = delete;
+    Mysql& operator = (const Mysql&) = delete;
+    static Mysql* instance;
 public:
-    explicit Mysql(QWidget *parent = nullptr);
+    static Mysql& getInstance();
     bool setConnect(QJsonObject jsonObj);
     void setDatabase(QString database);
     void databases();

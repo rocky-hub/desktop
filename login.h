@@ -34,7 +34,6 @@ public:
     QLineEdit *database;
     QPushButton *buttonConnect;
     FileSystem *fileHandle;
-    Mysql *mysqlHandle;
 
 signals:
     void reloadCentralWidget();

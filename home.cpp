@@ -29,8 +29,8 @@ QWidget *Home::leftWidget()
     leftWidget->setMaximumWidth(270);
     leftWidget->setMinimumWidth(150);
 
-    this->mysqlHandle = new Mysql;
-    this->mysqlHandle->databases();
+    Mysql& mysqlHandle = Mysql::getInstance();
+    mysqlHandle.databases();
 
     return leftWidget;
 }

@@ -1,10 +1,11 @@
 #include "mysql.h"
 
-Mysql::Mysql(QWidget *parent) : QWidget(parent)
+Mysql& Mysql::getInstance()
 {
+    static Mysql instance;
 
+    return instance;
 }
-
 
 bool Mysql::setConnect(QJsonObject jsonObj)
 {
