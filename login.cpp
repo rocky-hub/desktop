@@ -81,7 +81,6 @@ void Login::acceptLogin()
 
         mysqlHandle.dbInstances.append(name);
 
-        qDebug() << "singleton instance";
         emit reloadCentralWidget();
     } else {
         qDebug() << mysqlHandle.connectError();

@@ -11,6 +11,7 @@
 #include <QStringList>
 #include <QList>
 #include <QHeaderView>
+#include <QVector>
 
 class Home : public QWidget
 {

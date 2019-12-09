@@ -40,7 +40,12 @@ QWidget *Home::leftWidget()
     treeWidgetItem3->setText(0,"222_222");
 
     Mysql& mysqlHandle = Mysql::getInstance();
-    mysqlHandle.databases();
+    QVector<QString> databases = mysqlHandle.database();
+
+    qDebug() << 33;
+    for (int i = 0; i < databases.size(); ++i) {
+        qDebug() << databases[i];
+    }
 
     return treeWidget;
 }

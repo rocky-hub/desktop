@@ -23,8 +23,8 @@ public:
     static Mysql& getInstance();
     bool setConnect(QJsonObject jsonObj);
     void setDatabase(QString database);
-    void databases();
-    void tables();
+    QVector<QString> database();
+    void table();
     QString connectError();
 
     QSqlDatabase dbHandle;
