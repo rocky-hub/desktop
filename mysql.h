@@ -24,7 +24,7 @@ public:
     bool setConnect(QJsonObject jsonObj);
     void setDatabase(QString database);
     QVector<QString> database();
-    void table();
+    QVector<QString> table(QString database);
     QString connectError();
 
     QSqlDatabase dbHandle;

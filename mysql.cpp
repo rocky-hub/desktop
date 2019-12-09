@@ -32,8 +32,6 @@ void Mysql::setDatabase(QString database)
 
 QVector<QString> Mysql::database()
 {
-    qDebug() << dbInstances.isEmpty();
-
     QString databaseSql = "show databases;";
 
     QSqlQuery query;
@@ -47,20 +45,22 @@ QVector<QString> Mysql::database()
     return databases;
 }
 
-void Mysql::table()
+QVector<QString> Mysql::table(QString database)
 {
-    qDebug() << "show tables";
-    QString databaseSql = "use test;";
+    QString databaseSql = "use "+database+";";
 
     QSqlQuery query;
     query.exec(databaseSql);
 
-    QString tableSql = "show tables";
+    QString tableSql = "show tables;";
     query.exec(tableSql);
 
+    QVector<QString> tables;
     while (query.next()) {
-        qDebug() << query.value(0).toString();
+        tables.append(query.value(0).toString());
     }
+
+    return tables;
 }
 
 QString Mysql::connectError()

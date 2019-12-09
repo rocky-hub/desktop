@@ -30,21 +30,18 @@ QWidget *Home::leftWidget()
     treeWidget->setMaximumWidth(250);
     treeWidget->setMinimumWidth(170);
 
-    QTreeWidgetItem *treeWidgetItem = new QTreeWidgetItem(treeWidget);
-    treeWidgetItem->setText(0, "111");
-
-    QTreeWidgetItem *treeWidgetItem1 = new QTreeWidgetItem(treeWidget);
-    treeWidgetItem1->setText(0, "222");
-
-    QTreeWidgetItem *treeWidgetItem3 = new QTreeWidgetItem(treeWidgetItem1);
-    treeWidgetItem3->setText(0,"222_222");
-
     Mysql& mysqlHandle = Mysql::getInstance();
     QVector<QString> databases = mysqlHandle.database();
 
-    qDebug() << 33;
     for (int i = 0; i < databases.size(); ++i) {
-        qDebug() << databases[i];
+        QTreeWidgetItem *treeDatabaseItem = new QTreeWidgetItem(treeWidget);
+        treeDatabaseItem->setText(0, databases[i]);
+
+        QVector<QString> tables = mysqlHandle.table(databases[i]);
+        for (int j = 0; j < tables.size(); ++j) {
+            QTreeWidgetItem *treeTableItem = new QTreeWidgetItem(treeDatabaseItem);
+            treeTableItem->setText(0, tables[j]);
+        }
     }
 
     return treeWidget;
