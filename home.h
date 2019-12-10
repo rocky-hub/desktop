@@ -12,6 +12,8 @@
 #include <QList>
 #include <QHeaderView>
 #include <QVector>
+#include <QTableWidget>
+#include <QTableWidgetItem>
 
 class Home : public QWidget
 {

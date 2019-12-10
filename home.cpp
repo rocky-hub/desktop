@@ -64,9 +64,13 @@ QWidget *Home::rightTopWidget()
 
 QWidget *Home::rightButtomWidget()
 {
-    QTextEdit *rightButtomWidget = new QTextEdit("right bottom widegt");
+    QTableWidget *tableWidget = new QTableWidget(10, 5);
+    tableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    tableWidget->setItem(0,0,new QTableWidgetItem("Jan"));
+    tableWidget->setItem(1,0,new QTableWidgetItem("Feb"));
+    tableWidget->setItem(2,0,new QTableWidgetItem("Mar"));
 
-    return rightButtomWidget;
+    return tableWidget;
 }
 
 QWidget *Home::tableWidget()
