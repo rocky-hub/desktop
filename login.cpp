@@ -63,6 +63,7 @@ void Login::acceptLogin()
     QString port = this->port->text();
     QString username = this->username->text();
     QString password = this->password->text();
+    QString database = this->database->text();
 
     name = name.isEmpty() ? host : name;
 
@@ -72,6 +73,7 @@ void Login::acceptLogin()
     jsonObj.insert("port", port);
     jsonObj.insert("username", username);
     jsonObj.insert("password", password);
+    jsonObj.insert("database", database);
 
     Mysql& mysqlHandle = Mysql::getInstance();
 
@@ -80,6 +82,7 @@ void Login::acceptLogin()
         this->fileHandle->writeConfig(jsonObj);
 
         mysqlHandle.dbInstances.append(name);
+        mysqlHandle.currentDatabase = database;
 
         emit reloadCentralWidget();
     } else {
