@@ -25,10 +25,12 @@ public:
     void setDatabase(QString database);
     QVector<QString> database();
     QVector<QString> table(QString database);
+    QVector<QString> column(QString table);
     QString connectError();
 
     QSqlDatabase dbHandle;
     QVector<QString> dbInstances;
+    QString currentDatabase;
 
 signals:
 

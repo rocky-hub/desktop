@@ -65,6 +65,8 @@ QWidget *Home::rightTopWidget()
 QWidget *Home::rightButtomWidget()
 {
     QTableWidget *tableWidget = new QTableWidget(10, 5);
+    tableWidget->horizontalHeader()->setVisible(false);
+    tableWidget->verticalHeader()->setVisible(false);
     tableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
     tableWidget->setItem(0,0,new QTableWidgetItem("Jan"));
     tableWidget->setItem(1,0,new QTableWidgetItem("Feb"));
