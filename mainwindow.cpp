@@ -79,26 +79,27 @@ void MainWindow::initMenubar(QMainWindow *mainWindow)
 void MainWindow::initToolbar(QMainWindow *mainWindow)
 {
     toolBar = new QToolBar(mainWindow);
+    toolBar->setMovable(false);
 
-    QToolButton *structureTool = new QToolButton();
+    structureTool = new QToolButton();
     structureTool->setIcon(QIcon(":/resource/images/toolbar-structure.png"));
     structureTool->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
     structureTool->setText("structure");
     toolBar->addWidget(structureTool);
 
-    QToolButton *contentTool = new QToolButton();
+    contentTool = new QToolButton();
     contentTool->setIcon(QIcon(":/resource/images/toolbar-content.png"));
     contentTool->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
     contentTool->setText("content");
     toolBar->addWidget(contentTool);
 
-    QToolButton *tableInfoTool = new QToolButton();
+    tableInfoTool = new QToolButton();
     tableInfoTool->setIcon(QIcon(":/resource/images/toolbar-table-info.png"));
     tableInfoTool->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
     tableInfoTool->setText("table info");
     toolBar->addWidget(tableInfoTool);
 
-    QToolButton *commandTool = new QToolButton();
+    commandTool = new QToolButton();
     commandTool->setIcon(QIcon(":/resource/images/toolbar-command.png"));
     commandTool->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
     commandTool->setText("command");

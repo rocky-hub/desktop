@@ -42,6 +42,10 @@ public:
     QWidget *loginUi;
     Home *homeHandle;
     Mysql *mysqlHandle;
+    QToolButton *structureTool;
+    QToolButton *contentTool;
+    QToolButton *tableInfoTool;
+    QToolButton *commandTool;
 
 signals:
 
