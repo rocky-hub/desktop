@@ -48,6 +48,7 @@ void MainWindow::reloadCentralWidget()
 {
     this->homeHandle = new Home();
     setCentralWidget(this->homeHandle->centralWidget());
+    reloadDatabaseTool();
 }
 
 void MainWindow::initMenubar(QMainWindow *mainWindow)
@@ -81,6 +82,11 @@ void MainWindow::initToolbar(QMainWindow *mainWindow)
     toolBar = new QToolBar(mainWindow);
     toolBar->setMovable(false);
 
+    databaseTool = new QComboBox;
+    databaseTool->setMinimumWidth(250);
+    databaseTool->addItem("Chose Database");
+    toolBar->addWidget(databaseTool);
+
     structureTool = new QToolButton();
     structureTool->setIcon(QIcon(":/resource/images/toolbar-structure.png"));
     structureTool->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
@@ -107,10 +113,20 @@ void MainWindow::initToolbar(QMainWindow *mainWindow)
 
     addToolBar(toolBar);
 
+    connect(databaseTool, SIGNAL(currentTextChanged(const QString &text)), this, SLOT(databaseToolChange(const QString &text)));
     connect(structureTool, SIGNAL(clicked()), this, SLOT(structToolClick()));
     connect(contentTool, SIGNAL(clicked()), this, SLOT(contentToolClick()));
     connect(tableInfoTool, SIGNAL(clicked()), this, SLOT(tableInfoToolClick()));
     connect(commandTool, SIGNAL(clicked()), this, SLOT(commandToolClick()));
+}
+
+void MainWindow::reloadDatabaseTool()
+{
+    Mysql& mysqlHandle = Mysql::getInstance();
+    QVector<QString> databases = mysqlHandle.database();
+    for (int i = 0; i < databases.size(); ++i) {
+        databaseTool->addItem(databases[i]);
+    }
 }
 
 void MainWindow::structToolClick()
@@ -143,6 +159,11 @@ void MainWindow::resetToolActive()
     contentTool->setStyleSheet("");
     tableInfoTool->setStyleSheet("");
     commandTool->setStyleSheet("");
+}
+
+void MainWindow::databaseToolChange(const QString& database)
+{
+    qDebug() << database;
 }
 
 

@@ -17,6 +17,7 @@
 #include <QPushButton>
 #include <QTextEdit>
 #include <QToolButton>
+#include <QComboBox>
 #include "filesystem.h"
 #include "login.h"
 #include "mysql.h"
@@ -33,6 +34,7 @@ public:
     void initMenubar(QMainWindow *mainWindow);
     void initToolbar(QMainWindow *mainWindow);
     void initCentralWidget(QMainWindow *mainWindow);
+    void reloadDatabaseTool();
     QWidget *loginLayout();
     QMenuBar *menuBar;
     QToolBar *toolBar;
@@ -46,6 +48,7 @@ public:
     QToolButton *contentTool;
     QToolButton *tableInfoTool;
     QToolButton *commandTool;
+    QComboBox *databaseTool;
 
 signals:
 
@@ -56,5 +59,6 @@ public slots:
     void tableInfoToolClick();
     void commandToolClick();
     void resetToolActive();
+    void databaseToolChange(const QString& database);
 };
 #endif // MAINWINDOW_H
