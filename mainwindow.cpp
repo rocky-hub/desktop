@@ -106,6 +106,43 @@ void MainWindow::initToolbar(QMainWindow *mainWindow)
     toolBar->addWidget(commandTool);
 
     addToolBar(toolBar);
+
+    connect(structureTool, SIGNAL(clicked()), this, SLOT(structToolClick()));
+    connect(contentTool, SIGNAL(clicked()), this, SLOT(contentToolClick()));
+    connect(tableInfoTool, SIGNAL(clicked()), this, SLOT(tableInfoToolClick()));
+    connect(commandTool, SIGNAL(clicked()), this, SLOT(commandToolClick()));
+}
+
+void MainWindow::structToolClick()
+{
+    resetToolActive();
+    structureTool->setStyleSheet("background-color:#c6c6c6");
+}
+
+void MainWindow::contentToolClick()
+{
+    resetToolActive();
+    contentTool->setStyleSheet("background-color:#c6c6c6");
+}
+
+void MainWindow::tableInfoToolClick()
+{
+    resetToolActive();
+    tableInfoTool->setStyleSheet("background-color:#c6c6c6");
+}
+
+void MainWindow::commandToolClick()
+{
+    resetToolActive();
+    commandTool->setStyleSheet("background-color:#c6c6c6");
+}
+
+void MainWindow::resetToolActive()
+{
+    structureTool->setStyleSheet("");
+    contentTool->setStyleSheet("");
+    tableInfoTool->setStyleSheet("");
+    commandTool->setStyleSheet("");
 }
 
 

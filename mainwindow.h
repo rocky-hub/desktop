@@ -51,5 +51,10 @@ signals:
 
 public slots:
     void reloadCentralWidget();
+    void structToolClick();
+    void contentToolClick();
+    void tableInfoToolClick();
+    void commandToolClick();
+    void resetToolActive();
 };
 #endif // MAINWINDOW_H
