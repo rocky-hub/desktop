@@ -163,7 +163,10 @@ void MainWindow::resetToolActive()
 
 void MainWindow::databaseToolChange(const QString& database)
 {
-    qDebug() << database;
+    Mysql& mysqlHandle = Mysql::getInstance();
+    mysqlHandle.currentDatabase = database;
+
+    setCentralWidget(this->homeHandle->centralWidget());
 }
 
 

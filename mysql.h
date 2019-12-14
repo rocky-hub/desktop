@@ -31,6 +31,7 @@ public:
     QSqlDatabase dbHandle;
     QVector<QString> dbInstances;
     QString currentDatabase;
+    QString currentInstance;
 
 signals:
 

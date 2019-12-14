@@ -25,26 +25,21 @@ QWidget *Home::centralWidget()
 
 QWidget *Home::leftWidget()
 {
-    QTreeWidget *treeWidget = new QTreeWidget();
-    treeWidget->header()->setVisible(false);
-    treeWidget->setMaximumWidth(250);
-    treeWidget->setMinimumWidth(170);
-
     Mysql& mysqlHandle = Mysql::getInstance();
     QVector<QString> databases = mysqlHandle.database();
 
-    for (int i = 0; i < databases.size(); ++i) {
-        QTreeWidgetItem *treeDatabaseItem = new QTreeWidgetItem(treeWidget);
-        treeDatabaseItem->setText(0, databases[i]);
+    QListWidget *listWidget = new QListWidget();
+    listWidget->setMaximumWidth(270);
+    listWidget->setMidLineWidth(170);
 
-        QVector<QString> tables = mysqlHandle.table(databases[i]);
+    QVector<QString> tables = mysqlHandle.table(mysqlHandle.currentDatabase);
+    if (!mysqlHandle.currentDatabase.isEmpty()) {
         for (int j = 0; j < tables.size(); ++j) {
-            QTreeWidgetItem *treeTableItem = new QTreeWidgetItem(treeDatabaseItem);
-            treeTableItem->setText(0, tables[j]);
+            listWidget->addItem(new QListWidgetItem(QIcon(":/resource/images/table-small-square.png"), tables[j]));
         }
     }
 
-    return treeWidget;
+    return listWidget;
 }
 
 QWidget *Home::rightWidget()
