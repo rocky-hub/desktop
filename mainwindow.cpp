@@ -113,7 +113,7 @@ void MainWindow::initToolbar(QMainWindow *mainWindow)
 
     addToolBar(toolBar);
 
-    connect(databaseTool, SIGNAL(currentTextChanged(const QString &text)), this, SLOT(databaseToolChange(const QString &text)));
+    connect(databaseTool, SIGNAL(currentTextChanged(const QString &)), this, SLOT(databaseToolChange(const QString &)));
     connect(structureTool, SIGNAL(clicked()), this, SLOT(structToolClick()));
     connect(contentTool, SIGNAL(clicked()), this, SLOT(contentToolClick()));
     connect(tableInfoTool, SIGNAL(clicked()), this, SLOT(tableInfoToolClick()));
