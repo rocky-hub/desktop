@@ -19,6 +19,15 @@
 #include <QToolButton>
 #include <QComboBox>
 #include <QListWidget>
+#include <QListWidgetItem>
+#include <QTextEdit>
+#include <QDebug>
+#include <QStringList>
+#include <QList>
+#include <QHeaderView>
+#include <QVector>
+#include <QTableWidget>
+#include <QTableWidgetItem>
 #include "filesystem.h"
 #include "login.h"
 #include "mysql.h"
@@ -36,10 +45,15 @@ public:
     void initToolbar(QMainWindow *mainWindow);
     void initCentralWidget(QMainWindow *mainWindow);
     void reloadDatabaseTool();
+    QWidget *leftWidget();
+    QWidget *rightWidget();
+    QWidget *rightTopWidget();
+    QWidget *rightButtomWidget();
+    QWidget *tableWidget();
+    QWidget *commandWidget();
     QWidget *loginLayout();
     QMenuBar *menuBar;
     QToolBar *toolBar;
-    //QWidget *centralWidget;
     QGroupBox *formGroupBox;
     FileSystem *fileHandle;
     QWidget *loginUi;
@@ -50,7 +64,7 @@ public:
     QToolButton *tableInfoTool;
     QToolButton *commandTool;
     QComboBox *databaseTool;
-
+    QListWidget *tableListWidget;
 signals:
 
 public slots:
@@ -61,5 +75,6 @@ public slots:
     void commandToolClick();
     void resetToolActive();
     void databaseToolChange(const QString& database);
+    void tableSingleClicked(QListWidgetItem *item);
 };
 #endif // MAINWINDOW_H

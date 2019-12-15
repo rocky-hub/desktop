@@ -89,4 +89,5 @@ QWidget *Home::commandWidget()
 void Home::tableSingleClicked(QListWidgetItem* item)
 {
     qDebug() << item->text();
+    qDebug() << this->parent();
 }

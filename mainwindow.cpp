@@ -46,8 +46,21 @@ void MainWindow::initCentralWidget(QMainWindow *mainWindow)
 
 void MainWindow::reloadCentralWidget()
 {
-    this->homeHandle = new Home();
-    setCentralWidget(this->homeHandle->centralWidget());
+    QSplitter *mainSplitter = new QSplitter(Qt::Horizontal);
+    mainSplitter->setFrameStyle(QFrame::NoFrame);
+    mainSplitter->setHandleWidth(3);
+    mainSplitter->setChildrenCollapsible(false);
+
+    mainSplitter->addWidget(this->leftWidget());
+
+    QSplitter *rightSplitter = new QSplitter(Qt::Vertical, mainSplitter);
+
+    rightSplitter->addWidget(this->rightTopWidget());
+    rightSplitter->addWidget(this->rightButtomWidget());
+
+    mainSplitter->addWidget(rightSplitter);
+
+    setCentralWidget(mainSplitter);
     reloadDatabaseTool();
 }
 
@@ -166,7 +179,82 @@ void MainWindow::databaseToolChange(const QString& database)
     Mysql& mysqlHandle = Mysql::getInstance();
     mysqlHandle.currentDatabase = database;
 
-    setCentralWidget(this->homeHandle->centralWidget());
+    QVector<QString> tables = mysqlHandle.table(mysqlHandle.currentDatabase);
+    if (!mysqlHandle.currentDatabase.isEmpty()) {
+        tableListWidget->clear();
+        for (int j = 0; j < tables.size(); ++j) {
+            tableListWidget->addItem(new QListWidgetItem(QIcon(":/resource/images/table-small-square.png"), tables[j]));
+        }
+    }
+}
+
+QWidget *MainWindow::leftWidget()
+{
+    Mysql& mysqlHandle = Mysql::getInstance();
+    QVector<QString> databases = mysqlHandle.database();
+
+    tableListWidget = new QListWidget();
+    tableListWidget->setMaximumWidth(270);
+    tableListWidget->setMidLineWidth(170);
+
+    QVector<QString> tables = mysqlHandle.table(mysqlHandle.currentDatabase);
+    if (!mysqlHandle.currentDatabase.isEmpty()) {
+        tableListWidget->clear();
+        for (int j = 0; j < tables.size(); ++j) {
+            tableListWidget->addItem(new QListWidgetItem(QIcon(":/resource/images/table-small-square.png"), tables[j]));
+        }
+    }
+
+    connect(tableListWidget, SIGNAL(itemClicked(QListWidgetItem*)), this, SLOT(tableSingleClicked(QListWidgetItem*)));
+
+    return tableListWidget;
+}
+
+QWidget *MainWindow::rightWidget()
+{
+    QWidget *obj = new QWidget();
+
+    return obj;
+}
+
+QWidget *MainWindow::rightTopWidget()
+{
+    QTextEdit *rightTopWidget = new QTextEdit("top right widget");
+
+    return rightTopWidget;
+
+}
+
+QWidget *MainWindow::rightButtomWidget()
+{
+    QTableWidget *tableWidget = new QTableWidget(10, 5);
+    tableWidget->horizontalHeader()->setVisible(false);
+    tableWidget->verticalHeader()->setVisible(false);
+    tableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    tableWidget->setItem(0,0,new QTableWidgetItem("Jan"));
+    tableWidget->setItem(1,0,new QTableWidgetItem("Feb"));
+    tableWidget->setItem(2,0,new QTableWidgetItem("Mar"));
+
+    return tableWidget;
+}
+
+QWidget *MainWindow::tableWidget()
+{
+    QWidget *obj = new QWidget();
+
+    return obj;
+}
+
+QWidget *MainWindow::commandWidget()
+{
+    QWidget *obj = new QWidget();
+
+    return obj;
+}
+
+void MainWindow::tableSingleClicked(QListWidgetItem* item)
+{
+    qDebug() << item->text();
 }
 
 
