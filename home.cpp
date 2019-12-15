@@ -28,18 +28,20 @@ QWidget *Home::leftWidget()
     Mysql& mysqlHandle = Mysql::getInstance();
     QVector<QString> databases = mysqlHandle.database();
 
-    QListWidget *listWidget = new QListWidget();
-    listWidget->setMaximumWidth(270);
-    listWidget->setMidLineWidth(170);
+    QListWidget *tableWidget = new QListWidget();
+    tableWidget->setMaximumWidth(270);
+    tableWidget->setMidLineWidth(170);
 
     QVector<QString> tables = mysqlHandle.table(mysqlHandle.currentDatabase);
     if (!mysqlHandle.currentDatabase.isEmpty()) {
         for (int j = 0; j < tables.size(); ++j) {
-            listWidget->addItem(new QListWidgetItem(QIcon(":/resource/images/table-small-square.png"), tables[j]));
+            tableWidget->addItem(new QListWidgetItem(QIcon(":/resource/images/table-small-square.png"), tables[j]));
         }
     }
 
-    return listWidget;
+    connect(tableWidget, SIGNAL(itemClicked(QListWidgetItem*)), this, SLOT(tableSingleClicked(QListWidgetItem*)));
+
+    return tableWidget;
 }
 
 QWidget *Home::rightWidget()
@@ -82,4 +84,9 @@ QWidget *Home::commandWidget()
     QWidget *obj = new QWidget();
 
     return obj;
+}
+
+void Home::tableSingleClicked(QListWidgetItem* item)
+{
+    qDebug() << item->text();
 }

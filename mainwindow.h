@@ -18,6 +18,7 @@
 #include <QTextEdit>
 #include <QToolButton>
 #include <QComboBox>
+#include <QListWidget>
 #include "filesystem.h"
 #include "login.h"
 #include "mysql.h"
@@ -38,7 +39,7 @@ public:
     QWidget *loginLayout();
     QMenuBar *menuBar;
     QToolBar *toolBar;
-    QWidget *centralWidget;
+    //QWidget *centralWidget;
     QGroupBox *formGroupBox;
     FileSystem *fileHandle;
     QWidget *loginUi;

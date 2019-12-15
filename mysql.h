@@ -32,6 +32,8 @@ public:
     QVector<QString> dbInstances;
     QString currentDatabase;
     QString currentInstance;
+    QString currenctTable;
+    QString currentTool;
 
 signals:
 

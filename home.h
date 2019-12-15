@@ -31,6 +31,7 @@ public:
 signals:
 
 public slots:
+    void tableSingleClicked(QListWidgetItem *item);
 };
 
 #endif // HOME_H
