@@ -254,7 +254,11 @@ QWidget *MainWindow::commandWidget()
 
 void MainWindow::tableSingleClicked(QListWidgetItem* item)
 {
-    qDebug() << item->text();
+    Mysql& mysqlHandle = Mysql::getInstance();
+    mysqlHandle.currenctTable = item->text();
+
+    mysqlHandle.value();
+    //qDebug() << item->text();
 }
 
 

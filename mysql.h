@@ -26,6 +26,7 @@ public:
     QVector<QString> database();
     QVector<QString> table(QString database);
     QVector<QString> column(QString table);
+    void value();
     QString connectError();
 
     QSqlDatabase dbHandle;

@@ -80,6 +80,27 @@ QVector<QString> Mysql::column(QString tableName)
     return columns;
 }
 
+void Mysql::value()
+{
+    QString columnSql = "select COLUMN_NAME, DATA_TYPE from information_schema.COLUMNS where TABLE_SCHEMA = :database and TABLE_NAME = :table";
+
+    QSqlQuery query;
+    query.prepare(columnSql);
+    query.bindValue(":database", currentDatabase);
+    query.bindValue(":table", currenctTable);
+    query.exec();
+
+    qDebug() << query.lastError();
+
+    QVector<QString> values;
+
+    while (query.next()) {
+        QVector<QString> name;
+        QVector<QString> type;
+        qDebug() << query.value("COLUMN_NAME").toString() << query.value("DATA_TYPE").toString();
+    }
+}
+
 QString Mysql::connectError()
 {
     return dbHandle.lastError().text();
