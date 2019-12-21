@@ -22,6 +22,35 @@ bool Mysql::setConnect(QJsonObject jsonObj)
     return dbHandle.open();
 }
 
+QSqlError Mysql::addConnection(const QString name, const QString driver, const QString host,
+                               const QString user, const QString passwd, int port, const QString dbName)
+{
+    QSqlError error;
+    QSqlDatabase db = QSqlDatabase::addDatabase(driver, name);
+    db.setDatabaseName(dbName);
+    db.setHostName(host);
+    db.setPort(port);
+    db.setUserName(user);
+    db.setPassword(passwd);
+
+    if (!dbName.isNull()) {
+        db.setDatabaseName(dbName);
+    }
+
+    if (!db.open()) {
+        error = db.lastError();
+        db = QSqlDatabase();
+        QSqlDatabase::removeDatabase(name);
+    }
+
+    return error;
+}
+
+QSqlDatabase Mysql::currentDatabase() const
+{
+    return QSqlDatabase::database(activeConnection);
+}
+
 void Mysql::setDatabase(QString database)
 {
     QString databaseSql = "use "+database+";";
