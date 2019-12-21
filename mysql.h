@@ -28,17 +28,19 @@ public:
     QVector<QString> column(QString table);
     void value();
     QString connectError();
-    QSqlError addConnection(const QString name, const QString driver, const QString host,
-                                const QString user, const QString passwd, int port, const QString dbName = nullptr);
-    QSqlDatabase currentDatabase() const;
+    QSqlError addConnection(const QString name, const QString host, const QString user,
+                            const QString passwd, int port, const QString dbName = nullptr);
+    QSqlDatabase getCurrentConnection() const;
+
+    void setCurrenctDatabase();
 
     QSqlDatabase dbHandle;
     QVector<QString> dbInstances;
     QString currentInstance;
     QString currenctTable;
     QString currentTool;
-    QString activeConnection;
-    QString activeDatabase;
+    QString currentConnection;
+    QString currentDatabase;
 
 signals:
 

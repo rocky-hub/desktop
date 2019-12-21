@@ -22,12 +22,11 @@ bool Mysql::setConnect(QJsonObject jsonObj)
     return dbHandle.open();
 }
 
-QSqlError Mysql::addConnection(const QString name, const QString driver, const QString host,
-                               const QString user, const QString passwd, int port, const QString dbName)
+QSqlError Mysql::addConnection(const QString name, const QString host, const QString user,
+                               const QString passwd, int port, const QString dbName)
 {
     QSqlError error;
-    QSqlDatabase db = QSqlDatabase::addDatabase(driver, name);
-    db.setDatabaseName(dbName);
+    QSqlDatabase db = QSqlDatabase::addDatabase("QMYSQL", name);
     db.setHostName(host);
     db.setPort(port);
     db.setUserName(user);
@@ -35,20 +34,25 @@ QSqlError Mysql::addConnection(const QString name, const QString driver, const Q
 
     if (!dbName.isNull()) {
         db.setDatabaseName(dbName);
+        currentDatabase = dbName;
     }
 
     if (!db.open()) {
         error = db.lastError();
-        db = QSqlDatabase();
         QSqlDatabase::removeDatabase(name);
     }
 
     return error;
 }
 
-QSqlDatabase Mysql::currentDatabase() const
+QSqlDatabase Mysql::getCurrentConnection() const
 {
-    return QSqlDatabase::database(activeConnection);
+    return QSqlDatabase::database(currentConnection);
+}
+
+void Mysql::setCurrenctDatabase()
+{
+    getCurrentConnection().setDatabaseName(currentDatabase);
 }
 
 void Mysql::setDatabase(QString database)
@@ -97,7 +101,7 @@ QVector<QString> Mysql::column(QString tableName)
     QString columnSql = "select COLUMN_NAME from information_schema.COLUMNS where TABLE_SCHEMA = :database: and TABLE_NAME = :tableName:";
     QSqlQuery query;
     query.prepare(columnSql);
-    query.bindValue(0, currentDatabase);
+    query.bindValue(0, activeDatabase);
     query.bindValue(1, tableName);
     query.exec();
 
@@ -115,7 +119,7 @@ void Mysql::value()
 
     QSqlQuery query;
     query.prepare(columnSql);
-    query.bindValue(":database", currentDatabase);
+    query.bindValue(":database", activeDatabase);
     query.bindValue(":table", currenctTable);
     query.exec();
 

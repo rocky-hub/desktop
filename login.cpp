@@ -60,10 +60,14 @@ void Login::acceptLogin()
 {
     QString name = this->name->text();
     QString host = this->host->text();
-    QString port = this->port->text();
+    int port = this->port->text().toInt();
     QString username = this->username->text();
     QString password = this->password->text();
     QString database = this->database->text();
+
+    if (database.isEmpty()) {
+        database = nullptr;
+    }
 
     name = name.isEmpty() ? host : name;
 
@@ -77,17 +81,17 @@ void Login::acceptLogin()
 
     Mysql& mysqlHandle = Mysql::getInstance();
 
-    if (mysqlHandle.setConnect(jsonObj)) {
-        this->fileHandle = new FileSystem();
-        this->fileHandle->writeConfig(jsonObj);
-
-        mysqlHandle.dbInstances.append(name);
-        mysqlHandle.currentDatabase = database;
-
-        emit reloadCentralWidget();
-    } else {
-        qDebug() << mysqlHandle.connectError();
+    QSqlError err = mysqlHandle.addConnection(name, host, username, password, port, database);
+    if (err.type() != QSqlError::NoError) {
+        qDebug() << err.text();
     }
+
+    mysqlHandle.currentConnection = name;
+
+    this->fileHandle = new FileSystem();
+    this->fileHandle->writeConfig(jsonObj);
+
+    emit reloadCentralWidget();
 }
 
 QWidget *Login::setListWidget()

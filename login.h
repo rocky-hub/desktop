@@ -13,6 +13,7 @@
 #include <QJsonObject>
 #include <QListWidget>
 #include <QListWidgetItem>
+#include <QMessageBox>
 #include "filesystem.h"
 #include "mysql.h"
 
