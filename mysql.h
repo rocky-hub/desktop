@@ -30,7 +30,7 @@ public:
     QString connectError();
     QSqlError addConnection(const QString name, const QString host, const QString user,
                             const QString passwd, int port, const QString dbName = nullptr);
-    QSqlDatabase getCurrentConnection() const;
+    QSqlDatabase currentConnection() const;
 
     void setCurrenctDatabase();
 
@@ -39,8 +39,8 @@ public:
     QString currentInstance;
     QString currenctTable;
     QString currentTool;
-    QString currentConnection;
-    QString currentDatabase;
+    QString currentConnectionName;
+    QString currentDatabaseName;
 
 signals:
 

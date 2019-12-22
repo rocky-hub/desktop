@@ -34,7 +34,7 @@ QSqlError Mysql::addConnection(const QString name, const QString host, const QSt
 
     if (!dbName.isNull()) {
         db.setDatabaseName(dbName);
-        currentDatabase = dbName;
+        currentDatabaseName = dbName;
     }
 
     if (!db.open()) {
@@ -45,14 +45,14 @@ QSqlError Mysql::addConnection(const QString name, const QString host, const QSt
     return error;
 }
 
-QSqlDatabase Mysql::getCurrentConnection() const
+QSqlDatabase Mysql::currentConnection() const
 {
-    return QSqlDatabase::database(currentConnection);
+    return QSqlDatabase::database(currentConnectionName);
 }
 
 void Mysql::setCurrenctDatabase()
 {
-    getCurrentConnection().setDatabaseName(currentDatabase);
+    currentConnection().setDatabaseName(currentDatabaseName);
 }
 
 void Mysql::setDatabase(QString database)
@@ -65,9 +65,9 @@ void Mysql::setDatabase(QString database)
 
 QVector<QString> Mysql::database()
 {
-    QString databaseSql = "show databases;";
+    QSqlQuery query(currentConnection());
 
-    QSqlQuery query;
+    QString databaseSql = "show databases;";
     query.exec(databaseSql);
 
     QVector<QString> databases;
@@ -82,7 +82,7 @@ QVector<QString> Mysql::table(QString database)
 {
     QString databaseSql = "use "+database+";";
 
-    QSqlQuery query;
+    QSqlQuery query(currentConnection());
     query.exec(databaseSql);
 
     QString tableSql = "show tables;";
@@ -101,7 +101,7 @@ QVector<QString> Mysql::column(QString tableName)
     QString columnSql = "select COLUMN_NAME from information_schema.COLUMNS where TABLE_SCHEMA = :database: and TABLE_NAME = :tableName:";
     QSqlQuery query;
     query.prepare(columnSql);
-    query.bindValue(0, activeDatabase);
+    query.bindValue(0, currentDatabaseName);
     query.bindValue(1, tableName);
     query.exec();
 
@@ -119,11 +119,11 @@ void Mysql::value()
 
     QSqlQuery query;
     query.prepare(columnSql);
-    query.bindValue(":database", activeDatabase);
+    query.bindValue(":database", currentDatabaseName);
     query.bindValue(":table", currenctTable);
     query.exec();
 
-    qDebug() << query.lastError();
+    qDebug() << 33 << query.lastError();
 
     QVector<QString> values;
 

@@ -84,14 +84,14 @@ void Login::acceptLogin()
     QSqlError err = mysqlHandle.addConnection(name, host, username, password, port, database);
     if (err.type() != QSqlError::NoError) {
         qDebug() << err.text();
+    } else {
+        mysqlHandle.currentConnectionName = name;
+
+        this->fileHandle = new FileSystem();
+        this->fileHandle->writeConfig(jsonObj);
+
+        emit reloadCentralWidget();
     }
-
-    mysqlHandle.currentConnection = name;
-
-    this->fileHandle = new FileSystem();
-    this->fileHandle->writeConfig(jsonObj);
-
-    emit reloadCentralWidget();
 }
 
 QWidget *Login::setListWidget()

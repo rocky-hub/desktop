@@ -177,10 +177,10 @@ void MainWindow::resetToolActive()
 void MainWindow::databaseToolChange(const QString& database)
 {
     Mysql& mysqlHandle = Mysql::getInstance();
-    mysqlHandle.currentDatabase = database;
+    mysqlHandle.currentDatabaseName = database;
 
-    QVector<QString> tables = mysqlHandle.table(mysqlHandle.currentDatabase);
-    if (!mysqlHandle.currentDatabase.isEmpty()) {
+    QVector<QString> tables = mysqlHandle.table(mysqlHandle.currentDatabaseName);
+    if (!mysqlHandle.currentDatabaseName.isEmpty()) {
         tableListWidget->clear();
         for (int j = 0; j < tables.size(); ++j) {
             tableListWidget->addItem(new QListWidgetItem(QIcon(":/resource/images/table-small-square.png"), tables[j]));
@@ -197,8 +197,8 @@ QWidget *MainWindow::leftWidget()
     tableListWidget->setMaximumWidth(270);
     tableListWidget->setMidLineWidth(170);
 
-    QVector<QString> tables = mysqlHandle.table(mysqlHandle.currentDatabase);
-    if (!mysqlHandle.currentDatabase.isEmpty()) {
+    QVector<QString> tables = mysqlHandle.table(mysqlHandle.currentDatabaseName);
+    if (!mysqlHandle.currentDatabaseName.isEmpty()) {
         tableListWidget->clear();
         for (int j = 0; j < tables.size(); ++j) {
             tableListWidget->addItem(new QListWidgetItem(QIcon(":/resource/images/table-small-square.png"), tables[j]));
@@ -258,7 +258,6 @@ void MainWindow::tableSingleClicked(QListWidgetItem* item)
     mysqlHandle.currenctTable = item->text();
 
     mysqlHandle.value();
-    //qDebug() << item->text();
 }
 
 

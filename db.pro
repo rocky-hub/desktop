@@ -19,14 +19,12 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     login.cpp \
-    home.cpp \
     mysql.cpp \
     filesystem.cpp
 
 HEADERS += \
     mainwindow.h \
     login.h \
-    home.h \
     mysql.h \
     filesystem.h
 
