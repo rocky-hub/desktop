@@ -56,9 +56,9 @@ QVector<QString> Mysql::database()
     return databases;
 }
 
-QVector<QString> Mysql::table(QString database)
+QVector<QString> Mysql::table()
 {
-    QString databaseSql = "use "+database+";";
+    QString databaseSql = "use "+currentDatabaseName+";";
 
     QSqlQuery query(currentConnection());
     query.exec(databaseSql);
@@ -74,13 +74,13 @@ QVector<QString> Mysql::table(QString database)
     return tables;
 }
 
-QVector<QString> Mysql::column(QString tableName)
+QVector<QString> Mysql::column()
 {
     QString columnSql = "select COLUMN_NAME from information_schema.COLUMNS where TABLE_SCHEMA = :database: and TABLE_NAME = :tableName:";
     QSqlQuery query;
     query.prepare(columnSql);
     query.bindValue(0, currentDatabaseName);
-    query.bindValue(1, tableName);
+    query.bindValue(1, currenctTableName);
     query.exec();
 
     QVector<QString> columns;
@@ -89,23 +89,4 @@ QVector<QString> Mysql::column(QString tableName)
     }
 
     return columns;
-}
-
-void Mysql::value()
-{
-    QString columnSql = "select COLUMN_NAME, DATA_TYPE from information_schema.COLUMNS where TABLE_SCHEMA = :database and TABLE_NAME = :table";
-
-    QSqlQuery query;
-    query.prepare(columnSql);
-    query.bindValue(":database", currentDatabaseName);
-    query.bindValue(":table", currenctTable);
-    query.exec();
-
-    QVector<QString> values;
-
-    while (query.next()) {
-        QVector<QString> name;
-        QVector<QString> type;
-        qDebug() << query.value("COLUMN_NAME").toString() << query.value("DATA_TYPE").toString();
-    }
 }

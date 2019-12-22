@@ -22,21 +22,17 @@ private:
 public:
     static Mysql& getInstance();
     QVector<QString> database();
-    QVector<QString> table(QString database);
-    QVector<QString> column(QString table);
-    void value();
+    QVector<QString> table();
+    QVector<QString> column();
     QSqlError addConnection(const QString name, const QString host, const QString user,
                             const QString passwd, int port, const QString dbName = nullptr);
     QSqlDatabase currentConnection() const;
     void setCurrenctDatabase(const QString databaseName);
 
-    QSqlDatabase dbHandle;
-    QVector<QString> dbInstances;
-    QString currentInstance;
-    QString currenctTable;
     QString currentTool;
     QString currentConnectionName;
     QString currentDatabaseName;
+    QString currenctTableName;
 
 signals:
 
