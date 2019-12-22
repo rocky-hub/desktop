@@ -7,21 +7,6 @@ Mysql& Mysql::getInstance()
     return instance;
 }
 
-bool Mysql::setConnect(QJsonObject jsonObj)
-{
-    dbHandle = QSqlDatabase::addDatabase("QMYSQL");
-    dbHandle.setHostName(jsonObj.value("host").toString());
-    dbHandle.setPort(jsonObj.value("port").toInt());
-    dbHandle.setUserName(jsonObj.value("username").toString());
-    dbHandle.setPassword(jsonObj.value("password").toString());
-
-    if (!jsonObj.value("database").toString().isEmpty()) {
-        dbHandle.setDatabaseName(jsonObj.value("database").toString());
-    }
-
-    return dbHandle.open();
-}
-
 QSqlError Mysql::addConnection(const QString name, const QString host, const QString user,
                                const QString passwd, int port, const QString dbName)
 {
@@ -50,17 +35,10 @@ QSqlDatabase Mysql::currentConnection() const
     return QSqlDatabase::database(currentConnectionName);
 }
 
-void Mysql::setCurrenctDatabase()
+void Mysql::setCurrenctDatabase(const QString databaseName)
 {
-    currentConnection().setDatabaseName(currentDatabaseName);
-}
-
-void Mysql::setDatabase(QString database)
-{
-    QString databaseSql = "use "+database+";";
-
-    QSqlQuery query;
-    query.exec(databaseSql);
+    currentDatabaseName = databaseName;
+    currentConnection().setDatabaseName(databaseName);
 }
 
 QVector<QString> Mysql::database()
@@ -123,8 +101,6 @@ void Mysql::value()
     query.bindValue(":table", currenctTable);
     query.exec();
 
-    qDebug() << 33 << query.lastError();
-
     QVector<QString> values;
 
     while (query.next()) {
@@ -132,9 +108,4 @@ void Mysql::value()
         QVector<QString> type;
         qDebug() << query.value("COLUMN_NAME").toString() << query.value("DATA_TYPE").toString();
     }
-}
-
-QString Mysql::connectError()
-{
-    return dbHandle.lastError().text();
 }

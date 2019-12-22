@@ -21,18 +21,14 @@ private:
     static Mysql* instance;
 public:
     static Mysql& getInstance();
-    bool setConnect(QJsonObject jsonObj);
-    void setDatabase(QString database);
     QVector<QString> database();
     QVector<QString> table(QString database);
     QVector<QString> column(QString table);
     void value();
-    QString connectError();
     QSqlError addConnection(const QString name, const QString host, const QString user,
                             const QString passwd, int port, const QString dbName = nullptr);
     QSqlDatabase currentConnection() const;
-
-    void setCurrenctDatabase();
+    void setCurrenctDatabase(const QString databaseName);
 
     QSqlDatabase dbHandle;
     QVector<QString> dbInstances;
