@@ -46,22 +46,20 @@ void MainWindow::initCentralWidget(QMainWindow *mainWindow)
 
 void MainWindow::reloadCentralWidget()
 {
-    QSplitter *mainSplitter = new QSplitter(Qt::Horizontal);
+    reloadDatabaseTool();
+
+    mainSplitter = new QSplitter(Qt::Horizontal);
     mainSplitter->setFrameStyle(QFrame::NoFrame);
     mainSplitter->setHandleWidth(3);
     mainSplitter->setChildrenCollapsible(false);
 
-    mainSplitter->addWidget(this->leftWidget());
+    setLeftWidget();
+    setRightWidget();
 
-    QSplitter *rightSplitter = new QSplitter(Qt::Vertical, mainSplitter);
-
-    rightSplitter->addWidget(this->rightTopWidget());
-    rightSplitter->addWidget(this->rightButtomWidget());
-
-    mainSplitter->addWidget(rightSplitter);
+    mainSplitter->addWidget(tableListWidget);
+    mainSplitter->addWidget(rightWidget);
 
     setCentralWidget(mainSplitter);
-    reloadDatabaseTool();
 }
 
 void MainWindow::initMenubar(QMainWindow *mainWindow)
@@ -188,7 +186,7 @@ void MainWindow::databaseToolChange(const QString& database)
     }
 }
 
-QWidget *MainWindow::leftWidget()
+void MainWindow::setLeftWidget()
 {
     Mysql& mysqlHandle = Mysql::getInstance();
     QVector<QString> databases = mysqlHandle.database();
@@ -206,26 +204,19 @@ QWidget *MainWindow::leftWidget()
     }
 
     connect(tableListWidget, SIGNAL(itemClicked(QListWidgetItem*)), this, SLOT(tableSingleClicked(QListWidgetItem*)));
-
-    return tableListWidget;
 }
 
-QWidget *MainWindow::rightWidget()
+void MainWindow::setRightWidget()
 {
-    QWidget *obj = new QWidget();
-
-    return obj;
+    rightWidget = new QWidget();
 }
 
-QWidget *MainWindow::rightTopWidget()
+void MainWindow::setRightTopWidget()
 {
-    QTextEdit *rightTopWidget = new QTextEdit("top right widget");
-
-    return rightTopWidget;
-
+    rightTopWidget = new QTextEdit("top right widget");
 }
 
-QWidget *MainWindow::rightButtomWidget()
+void MainWindow::setRightButtomWidget()
 {
     QTableWidget *tableWidget = new QTableWidget(10, 5);
     tableWidget->horizontalHeader()->setVisible(false);
@@ -234,8 +225,6 @@ QWidget *MainWindow::rightButtomWidget()
     tableWidget->setItem(0,0,new QTableWidgetItem("Jan"));
     tableWidget->setItem(1,0,new QTableWidgetItem("Feb"));
     tableWidget->setItem(2,0,new QTableWidgetItem("Mar"));
-
-    return tableWidget;
 }
 
 QWidget *MainWindow::tableWidget()
@@ -257,6 +246,7 @@ void MainWindow::tableSingleClicked(QListWidgetItem* item)
     Mysql& mysqlHandle = Mysql::getInstance();
     mysqlHandle.currenctTableName = item->text();
 
+    qDebug() << mysqlHandle.currenctTableName;
 }
 
 

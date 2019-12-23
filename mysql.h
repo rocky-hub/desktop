@@ -29,7 +29,6 @@ public:
     QSqlDatabase currentConnection() const;
     void setCurrenctDatabase(const QString databaseName);
 
-    QString currentTool;
     QString currentConnectionName;
     QString currentDatabaseName;
     QString currenctTableName;

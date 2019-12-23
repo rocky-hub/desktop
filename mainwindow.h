@@ -31,7 +31,6 @@
 #include "filesystem.h"
 #include "login.h"
 #include "mysql.h"
-#include "home.h"
 
 class MainWindow : public QMainWindow
 {
@@ -45,10 +44,10 @@ public:
     void initToolbar(QMainWindow *mainWindow);
     void initCentralWidget(QMainWindow *mainWindow);
     void reloadDatabaseTool();
-    QWidget *leftWidget();
-    QWidget *rightWidget();
-    QWidget *rightTopWidget();
-    QWidget *rightButtomWidget();
+    void setLeftWidget();
+    void setRightWidget();
+    void setRightTopWidget();
+    void setRightButtomWidget();
     QWidget *tableWidget();
     QWidget *commandWidget();
     QWidget *loginLayout();
@@ -57,7 +56,6 @@ public:
     QGroupBox *formGroupBox;
     FileSystem *fileHandle;
     QWidget *loginUi;
-    Home *homeHandle;
     Mysql *mysqlHandle;
     QToolButton *structureTool;
     QToolButton *contentTool;
@@ -65,6 +63,13 @@ public:
     QToolButton *commandTool;
     QComboBox *databaseTool;
     QListWidget *tableListWidget;
+    QSplitter *mainSplitter;
+    QWidget *rightWidget;
+    QWidget *rightTopWidget;
+    QWidget *rightBottomWidget;
+
+    enum Tools {structure, content, info, command};
+    qint8 currentToolName = content;
 signals:
 
 public slots:
