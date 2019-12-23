@@ -193,7 +193,7 @@ void MainWindow::setLeftWidget()
 
     tableListWidget = new QListWidget();
     tableListWidget->setMaximumWidth(270);
-    tableListWidget->setMidLineWidth(170);
+    tableListWidget->setMinimumWidth(170);
 
     QVector<QString> tables = mysqlHandle.table();
     if (!mysqlHandle.currentDatabaseName.isEmpty()) {
@@ -208,7 +208,22 @@ void MainWindow::setLeftWidget()
 
 void MainWindow::setRightWidget()
 {
-    rightWidget = new QWidget();
+    switch (currentToolName) {
+        case structure:
+            break;
+        case content:
+
+            break;
+        case info:
+            break;
+        case command:
+            QSplitter *rightSplitter = new QSplitter(Qt::Vertical, mainSplitter);
+            rightSplitter->addWidget(rightTopWidget);
+            rightSplitter->addWidget(rightBottomWidget);
+
+            rightWidget = rightSplitter;
+            break;
+    }
 }
 
 void MainWindow::setRightTopWidget()
@@ -227,18 +242,36 @@ void MainWindow::setRightButtomWidget()
     tableWidget->setItem(2,0,new QTableWidgetItem("Mar"));
 }
 
-QWidget *MainWindow::tableWidget()
+void MainWindow::setTableWidget()
 {
-    QWidget *obj = new QWidget();
+    table = new QTableView(mainSplitter);
+    table->setObjectName(QString::fromUtf8("table"));
+    QSizePolicy sizePolicy2(QSizePolicy::Expanding, QSizePolicy::Expanding);
+    sizePolicy2.setHorizontalStretch(2);
+    sizePolicy2.setVerticalStretch(0);
+    sizePolicy2.setHeightForWidth(table->sizePolicy().hasHeightForWidth());
+    table->setSizePolicy(sizePolicy2);
+    table->setContextMenuPolicy(Qt::ActionsContextMenu);
+    table->setSelectionBehavior(QAbstractItemView::SelectRows);
 
-    return obj;
+    Mysql& mysqlHandle = Mysql::getInstance();
+
+    QSqlTableModel *model = new QSqlTableModel(table, mysqlHandle.currentConnection());
+    model->setEditStrategy(QSqlTableModel::OnRowChange);
+    model->setTable(mysqlHandle.currenctTableName);
+    model->select();
+
+    if (model->lastError().type() != QSqlError::NoError) {
+        qDebug() << model->lastError().text();
+    } else {
+        table->setModel(model);
+        table->setEditTriggers(QAbstractItemView::DoubleClicked|QAbstractItemView::EditKeyPressed);
+    }
 }
 
-QWidget *MainWindow::commandWidget()
+void MainWindow::setCommandWidget()
 {
     QWidget *obj = new QWidget();
-
-    return obj;
 }
 
 void MainWindow::tableSingleClicked(QListWidgetItem* item)

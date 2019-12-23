@@ -28,6 +28,8 @@
 #include <QVector>
 #include <QTableWidget>
 #include <QTableWidgetItem>
+#include <QTableView>
+#include <QSqlTableModel>
 #include "filesystem.h"
 #include "login.h"
 #include "mysql.h"
@@ -48,8 +50,8 @@ public:
     void setRightWidget();
     void setRightTopWidget();
     void setRightButtomWidget();
-    QWidget *tableWidget();
-    QWidget *commandWidget();
+    void setTableWidget();
+    void setCommandWidget();
     QWidget *loginLayout();
     QMenuBar *menuBar;
     QToolBar *toolBar;
@@ -67,6 +69,7 @@ public:
     QWidget *rightWidget;
     QWidget *rightTopWidget;
     QWidget *rightBottomWidget;
+    QTableView *table;
 
     enum Tools {structure, content, info, command};
     qint8 currentToolName = content;
