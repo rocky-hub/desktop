@@ -50,7 +50,7 @@ public:
     void setRightWidget();
     void setRightTopWidget();
     void setRightButtomWidget();
-    void setTableWidget();
+    QTableView* setTableWidget();
     void setCommandWidget();
     QWidget *loginLayout();
     QMenuBar *menuBar;

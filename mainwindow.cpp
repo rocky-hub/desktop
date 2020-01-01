@@ -57,7 +57,7 @@ void MainWindow::reloadCentralWidget()
     setRightWidget();
 
     mainSplitter->addWidget(tableListWidget);
-    mainSplitter->addWidget(rightWidget);
+    //mainSplitter->addWidget(rightWidget);
 
     setCentralWidget(mainSplitter);
 }
@@ -212,7 +212,6 @@ void MainWindow::setRightWidget()
         case structure:
             break;
         case content:
-
             break;
         case info:
             break;
@@ -242,21 +241,23 @@ void MainWindow::setRightButtomWidget()
     tableWidget->setItem(2,0,new QTableWidgetItem("Mar"));
 }
 
-void MainWindow::setTableWidget()
+QTableView* MainWindow::setTableWidget()
 {
-    table = new QTableView(mainSplitter);
-    table->setObjectName(QString::fromUtf8("table"));
-    QSizePolicy sizePolicy2(QSizePolicy::Expanding, QSizePolicy::Expanding);
-    sizePolicy2.setHorizontalStretch(2);
-    sizePolicy2.setVerticalStretch(0);
-    sizePolicy2.setHeightForWidth(table->sizePolicy().hasHeightForWidth());
-    table->setSizePolicy(sizePolicy2);
-    table->setContextMenuPolicy(Qt::ActionsContextMenu);
-    table->setSelectionBehavior(QAbstractItemView::SelectRows);
+    QTableView *tableView = new QTableView(mainSplitter);
+    tableView->setObjectName(QString::fromUtf8("table"));
+
+    QSizePolicy sizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+    sizePolicy.setHorizontalStretch(2);
+    sizePolicy.setVerticalStretch(0);
+    sizePolicy.setHeightForWidth(tableView->sizePolicy().hasHeightForWidth());
+
+    tableView->setSizePolicy(sizePolicy);
+    tableView->setContextMenuPolicy(Qt::ActionsContextMenu);
+    tableView->setSelectionBehavior(QAbstractItemView::SelectRows);
 
     Mysql& mysqlHandle = Mysql::getInstance();
 
-    QSqlTableModel *model = new QSqlTableModel(table, mysqlHandle.currentConnection());
+    QSqlTableModel *model = new QSqlTableModel(tableView, mysqlHandle.currentConnection());
     model->setEditStrategy(QSqlTableModel::OnRowChange);
     model->setTable(mysqlHandle.currenctTableName);
     model->select();
@@ -264,9 +265,11 @@ void MainWindow::setTableWidget()
     if (model->lastError().type() != QSqlError::NoError) {
         qDebug() << model->lastError().text();
     } else {
-        table->setModel(model);
-        table->setEditTriggers(QAbstractItemView::DoubleClicked|QAbstractItemView::EditKeyPressed);
+        tableView->setModel(model);
+        tableView->setEditTriggers(QAbstractItemView::DoubleClicked|QAbstractItemView::EditKeyPressed);
     }
+
+    return tableView;
 }
 
 void MainWindow::setCommandWidget()
@@ -280,6 +283,8 @@ void MainWindow::tableSingleClicked(QListWidgetItem* item)
     mysqlHandle.currenctTableName = item->text();
 
     qDebug() << mysqlHandle.currenctTableName;
+
+    rightWidget = qobject_cast<QWidget *>(setTableWidget());
 }
 
 
