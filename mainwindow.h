@@ -69,7 +69,6 @@ public:
     QWidget *rightWidget;
     QWidget *rightTopWidget;
     QWidget *rightBottomWidget;
-    QTableView *table;
 
     enum Tools {structure, content, info, command};
     qint8 currentToolName = content;

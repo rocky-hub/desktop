@@ -57,7 +57,7 @@ void MainWindow::reloadCentralWidget()
     setRightWidget();
 
     mainSplitter->addWidget(tableListWidget);
-    //mainSplitter->addWidget(rightWidget);
+    mainSplitter->addWidget(rightWidget);
 
     setCentralWidget(mainSplitter);
 }
@@ -212,6 +212,8 @@ void MainWindow::setRightWidget()
         case structure:
             break;
         case content:
+            rightWidget = new QWidget;
+            rightWidget->setWindowTitle("333");
             break;
         case info:
             break;
@@ -243,8 +245,12 @@ void MainWindow::setRightButtomWidget()
 
 QTableView* MainWindow::setTableWidget()
 {
-    QTableView *tableView = new QTableView(mainSplitter);
+    QTableView *tableView = new QTableView();
     tableView->setObjectName(QString::fromUtf8("table"));
+    tableView->verticalHeader()->hide();
+    tableView->horizontalHeader()
+            ->setStyleSheet("QHeaderView::section {background-color:#F0FFFF}");
+    tableView->setAlternatingRowColors(true);
 
     QSizePolicy sizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     sizePolicy.setHorizontalStretch(2);
@@ -282,9 +288,7 @@ void MainWindow::tableSingleClicked(QListWidgetItem* item)
     Mysql& mysqlHandle = Mysql::getInstance();
     mysqlHandle.currenctTableName = item->text();
 
-    qDebug() << mysqlHandle.currenctTableName;
-
-    rightWidget = qobject_cast<QWidget *>(setTableWidget());
+    mainSplitter->replaceWidget(1, setTableWidget());
 }
 
 
