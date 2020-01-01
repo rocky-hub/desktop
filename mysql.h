@@ -32,6 +32,8 @@ public:
     QString currentConnectionName;
     QString currentDatabaseName;
     QString currenctTableName;
+    unsigned int limit = 100;
+    unsigned int offset = 0;
 
 signals:
 
