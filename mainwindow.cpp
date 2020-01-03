@@ -249,7 +249,7 @@ QTableView* MainWindow::setTableWidget()
     tableView->setObjectName(QString::fromUtf8("table"));
     tableView->verticalHeader()->hide();
     tableView->horizontalHeader()
-            ->setStyleSheet("QHeaderView::section {background-color:#F0FFFF}");
+            ->setStyleSheet("QHeaderView::section {color:white; font:bold 10pt; background-color:rgb(108, 108, 108); border: 0px solid rgb(144, 144, 144);min-height:29px;}");
     tableView->setAlternatingRowColors(true);
 
     QSizePolicy sizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
