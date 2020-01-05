@@ -9,5 +9,8 @@
         <file>resource/images/toolbar-table-info.png</file>
         <file>resource/images/table-small-square.png</file>
         <file>resource/images/table-view-small-square.png</file>
+        <file>resource/images/button-left.png</file>
+        <file>resource/images/button-refresh.png</file>
+        <file>resource/images/button-right.png</file>
     </qresource>
 </RCC>
